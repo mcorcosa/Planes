@@ -1,7 +1,8 @@
 package model.VO 
 {
 	/**
-	 * VO pentru clasa Plane, ia info din assets/
+	 * VO care pastreaza dimensiunea si forma avionului
+	 * // TODO: scrie constructor care extrage info din xml, getter, setter
 	 * @author gh
 	 */
 	public class PlaneVO 

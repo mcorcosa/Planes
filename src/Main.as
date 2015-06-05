@@ -20,7 +20,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			ApplicationFacade.getInstance().startup( this );
+			ApplicationFacade.getInstance().startup(this.stage);
 		}
 		
 	}

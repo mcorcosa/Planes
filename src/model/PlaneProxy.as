@@ -5,7 +5,7 @@ package model
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 	/**
-	 * ...
+	 * Proxy pentru acces la PlaneVO
 	 * @author gh
 	 */
 	public class PlaneProxy extends Proxy implements IProxy 

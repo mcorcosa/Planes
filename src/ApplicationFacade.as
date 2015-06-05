@@ -21,6 +21,7 @@ package
 			return (instance ? instance : new ApplicationFacade()) as ApplicationFacade;
 		}
 		
+		//TODO: scrie + fa register la comenzile de care mai e nevoie
 		//initializeaza Controllerul si face register la comenzi
 		override protected function initializeController():void
 		{
@@ -30,7 +31,6 @@ package
 			
 		}
 		
-		//declanseaza StartupCommand, prin notificatie catre Stage din main
 		public function startup(stage:Object):void
 		{
 			sendNotification(STARTUP, stage);

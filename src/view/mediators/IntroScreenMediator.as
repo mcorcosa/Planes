@@ -1,4 +1,4 @@
-package view.mediators 
+package view.mediators
 {
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.interfaces.INotification;
@@ -6,25 +6,49 @@ package view.mediators
 	import view.views.IntroScreen;
 	
 	/**
-	 * ...
+	 * Mediator pentru Introscreen
 	 * @author gh
 	 */
-	public class IntroScreenMediator extends Mediator implements IMediator 
+	public class IntroScreenMediator extends Mediator implements IMediator
 	{
 		public static const NAME:String = "IntroScreenMediator";
-		private var IntroScreen:IntroScreen;
+		private var IS:IntroScreen;
 		
-		public function IntroScreenMediator(mediatorName:String=null, viewComponent:Object=null) 
+		public function IntroScreenMediator(mediatorName:String = null, viewComponent:Object = null)
 		{
 			super(mediatorName, viewComponent);
 		}
 		
 		override public function onRegister():void
-        {
-			IntroScreen = new IntroScreen;
-			viewComponent.addChild(IntroScreen);
-        }
+		{
+			IS = new IntroScreen;
+			viewComponent.addChild(IS);
+			
+			sendNotification(IntroScreen.DISPLAY);
+		}
 		
-	}	
+		override public function listNotificationInterests():Array
+		{
+			return [IntroScreen.DISPLAY, IntroScreen.START];
+		}
+		
+		override public function handleNotification(notification:INotification):void
+		{
+			var name:String = notification.getName();
+			var body:Object = notification.getBody();
+			
+			switch (name)
+			{
+				case IntroScreen.DISPLAY: 
+					IS.display();
+					break;
+				
+				/*case IntroScreen.START: 
+					IS.start();
+					break;*/
+			}
+		}
+	
+	}
 
 }
