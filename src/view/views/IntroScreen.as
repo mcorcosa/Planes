@@ -34,7 +34,7 @@ package view.views
 			var startButtonSprite:Sprite = new Sprite();
 			startButtonSprite.graphics.lineStyle(1, 0x555555);
 			startButtonSprite.graphics.beginFill(0xff000, 1);
-			startButtonSprite.graphics.drawRect(0, 0, 200, 30);
+			startButtonSprite.graphics.drawRoundRect(300, 280, 200, 30, 10, 10);
 			startButtonSprite.graphics.endFill();
 			startButton.overState = startButton.downState = startButton.upState = startButton.hitTestState = startButtonSprite;
 			startButton.addEventListener(MouseEvent.CLICK, startButtonClick);
@@ -43,6 +43,11 @@ package view.views
 			textBox.type = TextFieldType.INPUT;
 			textBox.background = true;
 			textBox.backgroundColor = uint("0x" + Globals.lightBlue.substr(1));
+			textBox.width = 200; 
+            textBox.height = 30;  
+            textBox.border = true; 
+			textBox.x = 300;
+			textBox.y = 200;
 			
 			addChild(startButton);
 			addChild(textBox);

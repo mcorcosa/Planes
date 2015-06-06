@@ -51,13 +51,6 @@ package view.mediators
 			}
 		}
 		
-		/*override public function sendNotification(notificationName:String, body:Object = null, type:String = null):void
-		{
-			trace(NAME+'Sent ' + notificationName);
-			
-			notifyObservers(new Notification(notificationName, body, type));
-		}*/
-		
 		public function startButtonClicked(e:StartGameEvent):void
 		{
 			sendNotification(STARTGAME, e.result);
