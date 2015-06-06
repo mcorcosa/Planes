@@ -1,5 +1,6 @@
 package
 {
+	import controller.StartGameCommand;
 	import controller.StartupCommand;
 	import org.puremvc.as3.interfaces.IFacade;
 	import org.puremvc.as3.patterns.facade.Facade;
@@ -14,6 +15,7 @@ package
 		public static const NAME:String = 'ApplicationFacade';
 		
 		public static const STARTUP:String = NAME + 'StartUp';
+		public static const STARTGAME:String = NAME + 'StartGame';
 		
 		//instantiaza ApplicationFacade, apelata in main
 		public static function getInstance():ApplicationFacade
@@ -28,7 +30,7 @@ package
 			super.initializeController();
 			
 			registerCommand(STARTUP, StartupCommand);
-			
+			registerCommand(STARTGAME, StartGameCommand)
 		}
 		
 		public function startup(stage:Object):void
@@ -39,7 +41,7 @@ package
 		//suprascrie sendNotification, ca sa adaug trace()
 		override public function sendNotification(notificationName:String, body:Object = null, type:String = null):void
 		{
-			trace('Sent ' + notificationName);
+			trace(NAME + ' Sent ' + notificationName);
 			
 			notifyObservers(new Notification(notificationName, body, type));
 		}
