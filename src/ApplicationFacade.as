@@ -1,6 +1,6 @@
 package
 {
-	import controller.StartGameCommand;
+	import controller.StartSetupCommand;
 	import controller.StartupCommand;
 	import org.puremvc.as3.interfaces.IFacade;
 	import org.puremvc.as3.patterns.facade.Facade;
@@ -16,7 +16,6 @@ package
 		public static const NAME:String = 'ApplicationFacade';
 		
 		public static const STARTUP:String = NAME + 'StartUp';
-		public static const STARTNEWGAME:String = NAME + 'StartGame';
 		
 		//instantiaza ApplicationFacade, apelata in main
 		public static function getInstance():ApplicationFacade
@@ -31,7 +30,7 @@ package
 			super.initializeController();
 			
 			registerCommand(STARTUP, StartupCommand);
-			registerCommand(STARTNEWGAME, StartGameCommand)
+			registerCommand(IntroScreenMediator.STARTSETUP, StartSetupCommand);
 		}
 		
 		public function startup(stage:Object):void

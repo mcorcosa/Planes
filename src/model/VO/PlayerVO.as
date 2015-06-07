@@ -7,16 +7,16 @@ package model.VO
 	 */
 	public class PlayerVO 
 	{
-		var name:String;
-		var numberOfPlanes:int;
+		public var name:String;
+		public var numberOfPlanes:int;
 		
 		public function PlayerVO() 
 		{
-			super();
+			
 		}
 		
 		public function setName(PlayerName:String):void {
-				this.name = PlayerName;
+			this.name = PlayerName;
 		}
 		
 		public function getName():String {

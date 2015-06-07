@@ -9,14 +9,13 @@ package view.mediators
 	import view.views.IntroScreen;
 	
 	/**
-	 * TODO: gaseste solutie sa trimiti data (playername) prin notificatie
 	 * Mediator pentru Introscreen
 	 * @author gh
 	 */
 	public class IntroScreenMediator extends Mediator implements IMediator
 	{
 		public static const NAME:String = "IntroScreenMediator";
-		public static const STARTGAME:String = "StartGame";
+		public static const STARTSETUP:String = "Start Setup";
 		private var IS:IntroScreen;
 		
 		public function IntroScreenMediator(mediatorName:String = null, viewComponent:Object = null)
@@ -30,7 +29,7 @@ package view.mediators
 			viewComponent.addChild(IS);
 			
 			sendNotification(IntroScreen.DISPLAY);
-			IS.addEventListener(StartGameEvent.STARTGAME, startButtonClicked);
+			IS.addEventListener(StartGameEvent.STARTSETUP, startButtonClicked);
 		}
 		
 		override public function listNotificationInterests():Array
@@ -53,7 +52,7 @@ package view.mediators
 		
 		public function startButtonClicked(e:StartGameEvent):void
 		{
-			sendNotification(STARTGAME, e.result);
+			sendNotification(STARTSETUP, e.result);
 			viewComponent.removeChild(IS);
 		}
 	

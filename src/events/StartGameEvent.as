@@ -8,7 +8,7 @@ package events
 	 */
 	public class StartGameEvent extends Event 
 	{
-		public static const STARTGAME:String = "STARTGAME";
+		public static const STARTSETUP:String = "Start Setup";
 		public var result:String;
 		
 		public function StartGameEvent(type:String, result:String, bubbles:Boolean=true, cancelable:Boolean=false) 
