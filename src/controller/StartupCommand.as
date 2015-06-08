@@ -1,6 +1,5 @@
 package controller
 {
-	import model.PlayerProxy;
 	import org.puremvc.as3.interfaces.ICommand;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -23,7 +22,6 @@ package controller
 		override public function execute(notification:INotification):void
 		{
 			facade.registerMediator(new IntroScreenMediator("IntroScreenMediator", notification.getBody()));
-			facade.registerProxy(new PlayerProxy());
 		}
 	
 	}

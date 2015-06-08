@@ -10,11 +10,6 @@ package model.VO
 	{
 		public var size:int;
 		public var map:Array;
-		
-		public function BoardVO(size:int) 
-		{
-			this.size = 
-		}
 	}
 
 }
