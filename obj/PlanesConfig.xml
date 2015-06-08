@@ -16,7 +16,11 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
+<<<<<<< HEAD
       <value>'08-Jun-15'</value>
+=======
+      <value>'06.06.2015'</value>
+>>>>>>> parent of e7156ae... Finished Intro Screen and loading from external XML file
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -32,15 +36,15 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\Caps\Documents\Actionscript Projects\Planes\src</path-element>
+      <path-element>C:\Users\Iovan\Documents\GitHub\Planes\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>C:\Users\Caps\Documents\Actionscript Projects\Planes\lib\PureMVC_AS3_2_0_4.swc</path-element>
+      <path-element>C:\Users\Iovan\Documents\GitHub\Planes\lib\PureMVC_AS3_2_0_4.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\Caps\Documents\Actionscript Projects\Planes\src\Main.as</path-element>
+    <path-element>C:\Users\Iovan\Documents\GitHub\Planes\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
