@@ -15,14 +15,6 @@ package model
 			
 		}
 		
-<<<<<<< HEAD
-=======
-		public function setPlayerName(PlayerName:String):void
-		{
-			Player.setName(PlayerName);
-		}
-	
->>>>>>> parent of e7156ae... Finished Intro Screen and loading from external XML file
 	}
 
 }

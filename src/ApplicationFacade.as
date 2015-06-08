@@ -1,9 +1,5 @@
 package
 {
-<<<<<<< HEAD
-=======
-	import controller.StartGameCommand;
->>>>>>> parent of e7156ae... Finished Intro Screen and loading from external XML file
 	import controller.StartupCommand;
 	import org.puremvc.as3.interfaces.IFacade;
 	import org.puremvc.as3.patterns.facade.Facade;
@@ -18,7 +14,6 @@ package
 		public static const NAME:String = 'ApplicationFacade';
 		
 		public static const STARTUP:String = NAME + 'StartUp';
-		public static const STARTNEWGAME:String = NAME + 'StartGame';
 		
 		//instantiaza ApplicationFacade, apelata in main
 		public static function getInstance():ApplicationFacade
@@ -33,11 +28,7 @@ package
 			super.initializeController();
 			
 			registerCommand(STARTUP, StartupCommand);
-<<<<<<< HEAD
 			
-=======
-			registerCommand(STARTNEWGAME, StartGameCommand)
->>>>>>> parent of e7156ae... Finished Intro Screen and loading from external XML file
 		}
 		
 		public function startup(stage:Object):void
