@@ -1,9 +1,11 @@
 package
 {
+	import controller.StartSetupCommand;
 	import controller.StartupCommand;
 	import org.puremvc.as3.interfaces.IFacade;
 	import org.puremvc.as3.patterns.facade.Facade;
 	import org.puremvc.as3.patterns.observer.Notification;
+	import view.mediators.IntroScreenMediator;
 	
 	/**
 	 * ...
@@ -28,7 +30,7 @@ package
 			super.initializeController();
 			
 			registerCommand(STARTUP, StartupCommand);
-			
+			registerCommand(IntroScreenMediator.STARTSETUP, StartSetupCommand);
 		}
 		
 		public function startup(stage:Object):void
@@ -39,10 +41,11 @@ package
 		//suprascrie sendNotification, ca sa adaug trace()
 		override public function sendNotification(notificationName:String, body:Object = null, type:String = null):void
 		{
-			trace('Sent ' + notificationName);
+			trace(' Sent ' + notificationName);
 			
 			notifyObservers(new Notification(notificationName, body, type));
 		}
+		
 	}
 
 }
