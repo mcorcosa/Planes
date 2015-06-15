@@ -28,7 +28,7 @@ package model.VO
 			{
 				sizesXML = XML(myLoader.data);
 				boardSize = sizesXML.BOARD_SIZE.@value;
-				trace("Data loaded. Board size = " + boardSize);
+				trace(" Data loaded. Board size = " + boardSize);
 				
 				for (var j:int = 0; j < Globals.NUMBER_OF_PLANES; j++) {
 					planeSize[j] = sizesXML.SHAPE[j].@size;

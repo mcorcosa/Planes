@@ -12,12 +12,12 @@ package controller
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
 	/**
-	 * ...
+	 * Se ocupa de plasarea avioanelor pe board-ul unui jucator
+	 * TODO: refactor pentru ca tot procesul de setup sa il execut cu un macro command
 	 * @author gh
 	 */
 	public class PlacePlanesCommand extends SimpleCommand implements ICommand
-	{
-		
+	{	
 		override public function execute(notification:INotification):void
 		{
 			var Factory:PlaneFactory = new PlaneFactory;
@@ -30,6 +30,7 @@ package controller
 			{
 				//creeaza primul avion
 				planeToPlace = Factory.createPlane(sizes[playerProxy.getNumberOfPlanes()], shapes[playerProxy.getNumberOfPlanes()]);
+				
 				
 				//pune userul sa introduca pozitia si rotatia
 				posx = 17; posy = 10;
@@ -65,7 +66,7 @@ package controller
 		{
 			return facade.retrieveProxy(DataProxy.NAME) as DataProxy;
 		}
-				
+
 		private function get playerProxy():PlayerProxy
 		{
 			return facade.retrieveProxy(PlayerProxy.NAME) as PlayerProxy;

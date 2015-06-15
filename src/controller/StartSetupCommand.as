@@ -9,6 +9,7 @@ package controller
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 	import view.mediators.BoardViewMediator;
+	import view.mediators.SetupScreenMediator;
 	
 	/**
 	 * ...
@@ -22,23 +23,23 @@ package controller
 		
 		override public function execute(notification:INotification):void
 		{
-			var PlayerName:String = notification.getBody() as String;
-			//set up players
-			playerProxy.setPlayerName(PlayerName);
+
 			
 			//set up player's board and its view
 			facade.registerProxy(new PlayerBoardProxy(dataProxy.getBoardSize()));
-			sendNotification(DISPLAYBOARD, playerBoardProxy)
+			
+			//start Setup Screen
+			facade.registerMediator(new SetupScreenMediator(" SetupScreenMediator", notification.getBody()));			
 			
 			//place player's planes onto the board
-			sendNotification(PLACE, playerBoardProxy);
-				
+			//sendNotification(PLACE, playerBoardProxy);
+			
+			
+			//TODO: muta in comanda de Start Game sendNotification(DISPLAYBOARD, playerBoardProxy)
+			
+			
 		}
 		
-		private function get playerProxy():PlayerProxy
-		{
-			return facade.retrieveProxy(PlayerProxy.NAME) as PlayerProxy;
-		}
 		
 		private function get playerBoardProxy():BoardProxy
 		{

@@ -2,22 +2,15 @@ package view.views
 {
 	import flash.display.Shape;
 	import flash.display.Sprite;
-	
+	import flash.events.MouseEvent;
+
 	/**
-	 * Deseneaza un board
-	 * scrie functia de desenare, accepta input pentru plasarea avioanelor si pentru hit
+	 * Afiseaza un ecran pentru asezarea avioanelor pe tabla
 	 * @author gh
 	 */
-	public class BoardView extends Sprite
+	public class SetupScreen extends Sprite
 	{
-		public static const NAME:String = "Board View";
-		
-
-		
-		public function BoardView() 
-		{
-			super();
-		}
+		public static const NAME:String = "Setup Screen";
 		
 		public function display(map:Array, size:int):void
 		{
@@ -50,6 +43,16 @@ package view.views
 				}
 			}
 		}
+	
+	/*public function startButtonClick(e:MouseEvent):void
+	   {
+	   if (!textBox.text) {
+	   trace ("Enter a player name");
+	   textField.textColor = 0xFF0000;
+	   }
+	   else
+	   dispatchEvent(new StartGameEvent(STARTSETUP, textBox.text));
+	 }*/
 	
 	}
 

@@ -20,6 +20,8 @@ package
 		
 		public static var NUMBER_OF_PLANES:int = 4;
 		
+		public static const HEXWIDTH:int = 15;
+		
 		public function Globals()
 		{
 		

@@ -8,7 +8,7 @@ package model
 	 */
 	public class PlayerBoardProxy extends BoardProxy implements IProxy 
 	{
-		public static const NAME:String = "PlayerBoardProxy";
+		public static const NAME:String = " PlayerBoardProxy";
 		
 		public function PlayerBoardProxy(size:int) 
 		{
