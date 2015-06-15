@@ -2,7 +2,6 @@ package model.VO
 {
 	/**
 	 * VO care pastreaza dimensiunea si "harta" suprafetei de joc
-	 * // TODO: scrie constructor care extrage info din xml, getter, setter
 	 * TODO: eventual, regandeste-o ca sa contina AvionVO la anumite coordonate
 	 * @author gh
 	 */
@@ -13,8 +12,30 @@ package model.VO
 		
 		public function BoardVO(size:int) 
 		{
-			this.size = 
+			this.size = size;
+			map = new Array(size);
+			for (var i:int = 0; i < size; i++) 
+			{
+				map[i] = new Array (size);
+				for (var j:int = 0; j < size; j++) 
+				{
+					map[i][j]=0;
+				}
+			}
 		}
+		
+		public function display():void {
+			for (var i:int = 0; i < size; i++) 
+			{
+				trace ("linia" +i);
+				for (var j:int = 0; j < size; j++) 
+				{
+					trace (map[i][j]);
+				}
+			}
+		}
+		
+		
 	}
 
 }

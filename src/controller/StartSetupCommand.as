@@ -1,6 +1,9 @@
 package controller
 {
+	import flash.events.Event;
+	import model.BoardProxy;
 	import model.DataProxy;
+	import model.PlayerBoardProxy;
 	import model.PlayerProxy;
 	import org.puremvc.as3.interfaces.ICommand;
 	import org.puremvc.as3.interfaces.INotification;
@@ -13,14 +16,23 @@ package controller
 	 */
 	public class StartSetupCommand extends SimpleCommand implements ICommand
 	{
+		public static const NAME:String = 'StartSetupCommand ';
+		public static const PLACE:String = NAME + 'PLACE';
+		public static const DISPLAYBOARD:String = NAME + 'DISPLAY';
 		
 		override public function execute(notification:INotification):void
 		{
 			var PlayerName:String = notification.getBody() as String;
+			//set up players
 			playerProxy.setPlayerName(PlayerName);
-			facade.registerProxy(new DataProxy());
-			dataProxy.loadXML();
-			facade.registerMediator(new BoardViewMediator ("IntroScreenMediator", notification.getBody()));
+			
+			//set up player's board and its view
+			facade.registerProxy(new PlayerBoardProxy(dataProxy.getBoardSize()));
+			sendNotification(DISPLAYBOARD, playerBoardProxy)
+			
+			//place player's planes onto the board
+			sendNotification(PLACE, playerBoardProxy);
+				
 		}
 		
 		private function get playerProxy():PlayerProxy
@@ -28,11 +40,16 @@ package controller
 			return facade.retrieveProxy(PlayerProxy.NAME) as PlayerProxy;
 		}
 		
+		private function get playerBoardProxy():BoardProxy
+		{
+			return facade.retrieveProxy(PlayerBoardProxy.NAME) as PlayerBoardProxy;
+		}
+		
 		private function get dataProxy():DataProxy
 		{
 			return facade.retrieveProxy(DataProxy.NAME) as DataProxy;
 		}
-	
+		
 	}
 
 }
