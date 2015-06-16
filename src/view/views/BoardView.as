@@ -1,37 +1,56 @@
-package view.views 
+package view.views
 {
+	import flash.display.Shape;
 	import flash.display.Sprite;
+	
 	/**
 	 * Deseneaza un board
-	 * TODO: scrie functia de desenare, accepta input pentru plasarea avioanelor si pentru hit
+	 * scrie functia de desenare, accepta input pentru plasarea avioanelor si pentru hit
 	 * @author gh
 	 */
-	public class BoardView {
+	public class BoardView extends Sprite
+	{
 		public static const NAME:String = "Board View";
-		public static const DISPLAY:String = NAME + "Show"
 		
-		private var grid:Sprite = new Sprite();
-		
-		public function drawBoard(numColumns:Number, numRows:Number, cellHeight:Number, cellWidth:Number, grid:Sprite):void 
-		{
-			grid.graphics.clear();
-			grid.graphics.lineStyle(1, 0x000000);
 
-			// we drop in the " + 1 " so that it will cap the right and bottom sides.
-			for (var col:Number = 0; col < numColumns + 1; col++)
-			{
-				for (var row:Number = 0; row < numRows + 1; row++)
-				{
-					trace(col, row);
-					grid.graphics.moveTo(col * cellWidth, 0);
-					grid.graphics.lineTo(col * cellWidth, cellHeight * numRows);
-					grid.graphics.moveTo(0, row * cellHeight);
-					grid.graphics.lineTo(cellWidth * numColumns, row * cellHeight);
-				}
-			}
-			addchild(grid);
+		
+		public function BoardView() 
+		{
+			super();
 		}
 		
+		public function display(map:Array, size:int):void
+		{
+			for (var i:int = 0; i < size; i++)
+			{
+				for (var j:int = 0; j < size; j++)
+				{
+					var rectangle:Shape = new Shape; // initializing the variable named rectangle
+					
+					//schimba culoarea in functie de ce e pe tile
+					switch (map[i][j]) 
+					{
+						//tile e gol
+						case 0:
+							rectangle.graphics.beginFill(uint("0x" + Globals.lightBlue.substr(1)));
+						break;
+						
+						//tile e un avion mort
+						case 999:
+							rectangle.graphics.beginFill(0x800000);
+						break;
+						
+						default:
+						rectangle.graphics.beginFill(uint(Globals.planeColor));
+					}
+					rectangle.graphics.lineStyle(1, 0x000000);
+					rectangle.graphics.drawRect(Globals.HEXWIDTH*(1+i), Globals.HEXWIDTH*(1+j), Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
+					rectangle.graphics.endFill(); // not always needed but I like to put it in to end the fill
+					addChild(rectangle); // adds the rectangle to the stage
+				}
+			}
+		}
+	
 	}
 
 }
