@@ -24,20 +24,18 @@ package controller
 			var sizes:Array = dataProxy.getPlaneSizes();
 			var shapes:Array = dataProxy.getPlaneShapes();
 			var planeToPlace:PlaneVO;
-			var posx:int=0, posy:int=0, rotation:int=0;
+			var name:String = notification.getName();
+			var body:Object = notification.getBody();
+			var posx:int = body.x, posy:int = body.y, rotation:int = 0;
+			var boardProxy:BoardProxy = body.boardProxy;
 			
-			while (playerProxy.getNumberOfPlanes()<Globals.NUMBER_OF_PLANES) 
-			{
-				//creeaza primul avion
-				planeToPlace = Factory.createPlane(sizes[playerProxy.getNumberOfPlanes()], shapes[playerProxy.getNumberOfPlanes()]);
-				
-				
-				//pune userul sa introduca pozitia si rotatia
-				posx = 17; posy = 10;
-				
-				//testeaza ca avionul sa nu depaseasca marginile
-				if (posx >= 0 && posx <= playerBoardProxy.getBoardSize()) {
-					if (posy >= 0 && posy <= playerBoardProxy.getBoardSize()) {
+			//creeaza avionul
+			planeToPlace = Factory.createPlane(sizes[playerProxy.getNumberOfPlanes()], shapes[playerProxy.getNumberOfPlanes()]);
+			
+			//testeaza ca avionul sa nu depaseasca marginile
+				if (posx <= boardProxy.getBoardSize()-planeToPlace.size) {
+					if (posy <= boardProxy.getBoardSize()-planeToPlace.size) {
+
 						//TODO:testeaza daca avionul nu se suprapune cu altele
 						planeToPlace.rotate(rotation);
 						placePlane(planeToPlace, posx, posy)
@@ -47,21 +45,29 @@ package controller
 					else {
 						trace("Pozitie incorecta, obtine coordonate noi");
 					}
+					}
+				else {
+						trace("Pozitie incorecta, obtine coordonate noi");
 				}
+			
+			/*while (playerProxy.getNumberOfPlanes()<Globals.NUMBER_OF_PLANES) 
+			{
+				//creeaza primul avion
+				
+								
+				//pune userul sa introduca pozitia si rotatia
+				posx = body.x; posy = body.y;
+				
+				
 				else
 					trace("Pozitie incorecta, obtine coordonate noi");
-			}
+			}*/
 		}
 		
 		private function placePlane(plane:PlaneVO, posx:int, posy: int):void {
 			
 		}
 
-		private function get playerBoardProxy():BoardProxy
-		{
-			return facade.retrieveProxy(PlayerBoardProxy.NAME) as PlayerBoardProxy;
-		}
-		
 		private function get dataProxy():DataProxy
 		{
 			return facade.retrieveProxy(DataProxy.NAME) as DataProxy;

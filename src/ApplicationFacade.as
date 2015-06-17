@@ -7,6 +7,7 @@ package
 	import org.puremvc.as3.patterns.facade.Facade;
 	import org.puremvc.as3.patterns.observer.Notification;
 	import view.mediators.IntroScreenMediator;
+	import view.mediators.SetupScreenMediator;
 	
 	/**
 	 * ...
@@ -32,8 +33,7 @@ package
 			
 			registerCommand(STARTUP, StartupCommand);
 			registerCommand(IntroScreenMediator.STARTSETUP, StartSetupCommand);
-			registerCommand(StartSetupCommand.PLACE, PlacePlanesCommand);
-			//registerCommand(StartSetupCommand.DISPLAYBOARD, );
+			registerCommand(SetupScreenMediator.PLACE, PlacePlanesCommand);
 		}
 		
 		public function startup(stage:Object):void

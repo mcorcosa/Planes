@@ -1,7 +1,9 @@
 package view.mediators 
 {
+	import events.ClickGridEvent;
 	import model.BoardProxy;
 	import model.PlayerBoardProxy;
+	import model.VO.Coords;
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.patterns.mediator.Mediator;
 	import view.views.SetupScreen;
@@ -14,7 +16,8 @@ package view.mediators
 	{
 		
 		public static const NAME:String = " SetupScreenMediator";
-		
+		public static const PLACE:String = " Place"
+		public static const CLICKGRIDEVENT:String = " Click grid Event";
 		
 		private var SS:SetupScreen;
 		
@@ -25,10 +28,18 @@ package view.mediators
 		
 		override public function onRegister():void
 		{
+			trace(" SetupScreenMediator registered");
 			SS = new SetupScreen;
-			trace("SetupScreenMediator registered");
+			this.SS.addEventListener(ClickGridEvent.CLICKGRIDEVENT, gridClicked);
 			viewComponent.addChild(SS);
 			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
+		}
+		
+		public function gridClicked(e:ClickGridEvent):void {
+			trace(" mediator got click"+ e.x + " "+ e.y)
+			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy);
+			sendNotification(PLACE, coords);
+			//SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
 		}
 		
 		/*override public function listNotificationInterests():Array

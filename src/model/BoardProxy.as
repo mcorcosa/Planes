@@ -11,9 +11,7 @@ package model
 	 */
 	public class BoardProxy extends Proxy implements IProxy 
 	{
-		
-		
-		
+
 		public var Board:BoardVO;
 		
 		public function BoardProxy(NAME:String, size:int)

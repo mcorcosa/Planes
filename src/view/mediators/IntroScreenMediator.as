@@ -28,8 +28,8 @@ package view.mediators
 		{
 			IS = new IntroScreen;
 			viewComponent.addChild(IS);
-			
-			sendNotification(IntroScreen.DISPLAY);
+			IS.display();
+			//sendNotification(IntroScreen.DISPLAY);
 			IS.addEventListener(StartGameEvent.STARTSETUP, startButtonClicked);
 		}
 		
@@ -56,9 +56,8 @@ package view.mediators
 			//set up player
 			var PlayerName:String = e.result as String;
 			playerProxy.setPlayerName(PlayerName);
-			trace(" Player name set to"+playerProxy.vo.name)
+			trace(" Player name set to "+playerProxy.vo.name)
 			viewComponent.removeChild(IS);
-			
 			sendNotification(STARTSETUP, viewComponent);
 		}
 		

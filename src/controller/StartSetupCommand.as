@@ -31,10 +31,6 @@ package controller
 			//start Setup Screen
 			facade.registerMediator(new SetupScreenMediator(" SetupScreenMediator", notification.getBody()));			
 			
-			//place player's planes onto the board
-			//sendNotification(PLACE, playerBoardProxy);
-			
-			
 			//TODO: muta in comanda de Start Game sendNotification(DISPLAYBOARD, playerBoardProxy)
 			
 			
