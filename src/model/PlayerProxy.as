@@ -30,14 +30,6 @@ package model
         {
             return data as PlayerVO;
         }
-		
-		public function getNumberOfPlanes():int {
-			return vo.numberOfPlanes;
-		}
-		
-		public function addPlane():void {
-			vo.numberOfPlanes++;
-		}
 	
 	}
 

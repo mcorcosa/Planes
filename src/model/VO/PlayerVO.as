@@ -2,14 +2,14 @@ package model.VO
 {
 	/**
 	 VO care pastreaza dimensiunea si "harta" suprafetei de joc
-	 * // 
+	 * // TODO: scrie constructor, setter pentru nume
 	 * @author gh
 	 */
 	public class PlayerVO 
 	{
 		public var name:String;
 		public var numberOfPlanes:int;
-				
+		
 		public function PlayerVO() 
 		{
 			
@@ -22,7 +22,6 @@ package model.VO
 		public function getName():String {
 				return this.name;
 		}
-		
 	}
 
 }

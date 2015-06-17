@@ -30,18 +30,6 @@ package model
             return data as DataVO;
         }
 		
-		public function getBoardSize():int {
-			return vo.boardSize;
-		}
-		
-		public function getPlaneSizes():Array {
-			return vo.planeSize;
-		}
-		
-		public function getPlaneShapes():Array {
-			return vo.planeShape;
-		}
-		
 	}
 
 }

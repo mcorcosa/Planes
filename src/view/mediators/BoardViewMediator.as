@@ -1,7 +1,5 @@
 package view.mediators 
 {
-	import controller.StartSetupCommand;
-	import model.PlayerBoardProxy;
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -26,13 +24,12 @@ package view.mediators
 		override public function onRegister():void
 		{
 			BV = new BoardView;
-			trace(" BoardViewMediator registered");
 			viewComponent.addChild(BV);
 		}
 		
 		override public function listNotificationInterests():Array
 		{
-			return [StartSetupCommand.DISPLAYBOARD];
+			return [BoardView.DISPLAY];
 		}
 		
 		override public function handleNotification(notification:INotification):void
@@ -42,13 +39,9 @@ package view.mediators
 			
 			switch (name)
 			{
-				case StartSetupCommand.DISPLAYBOARD: 
-					//testeaza daca trebuie desenata tabla jucatorului sau CPU
-					if (body is PlayerBoardProxy) {
-						viewComponent.addChild(BV);
-						trace(NAME+" got display player board command")
-						BV.display(body.getBoardMap(), body.getBoardSize());
-					}
+				case BoardView.DISPLAY: 
+					BV.drawBoard();
+					break;
 			}
 		}
 	}
