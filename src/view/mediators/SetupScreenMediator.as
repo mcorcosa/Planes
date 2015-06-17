@@ -39,7 +39,7 @@ package view.mediators
 			trace(" mediator got click"+ e.x + " "+ e.y)
 			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy);
 			sendNotification(PLACE, coords);
-			//SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
+			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
 		}
 		
 		/*override public function listNotificationInterests():Array

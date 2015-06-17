@@ -33,6 +33,18 @@ package model
 			vo.display();
 		}
 		
+		public function addPlane(posx:int, posy:int, planeToPlace:PlaneVO):void {
+			for (var j:int = posx; j < planeToPlace.size+posx; j++) 
+			{
+				for (var i:int = posy; i < planeToPlace.size+posy; i++) 
+				{
+					trace("Avionul cu id " + vo.planes + ", Size " + planeToPlace.size + ", Shape " + planeToPlace.shape + ", depus pe board "+vo+", la pozitia "+posx+"  "+posy);
+					//vo.map[i][j]=planeToPlace.map[i-posx][j-posy]
+				}
+			}
+			vo.planes++;
+		}
+		
 	}
 
 }

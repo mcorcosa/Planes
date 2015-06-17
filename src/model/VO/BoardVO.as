@@ -9,6 +9,7 @@ package model.VO
 	{
 		public var size:int;
 		public var map:Array;
+		public var planes:int = 0;
 		
 		public function BoardVO(size:int) 
 		{
@@ -19,7 +20,7 @@ package model.VO
 				map[i] = new Array (size);
 				for (var j:int = 0; j < size; j++) 
 				{
-					map[i][j]=0;
+					map[i][j]=;
 				}
 			}
 		}
@@ -35,6 +36,9 @@ package model.VO
 			}
 		}
 		
+		public function addPlane():void {
+			planes++;
+		}
 		
 	}
 

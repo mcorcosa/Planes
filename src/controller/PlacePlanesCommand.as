@@ -30,7 +30,7 @@ package controller
 			var boardProxy:BoardProxy = body.boardProxy;
 			
 			//creeaza avionul
-			planeToPlace = Factory.createPlane(sizes[playerProxy.getNumberOfPlanes()], shapes[playerProxy.getNumberOfPlanes()]);
+			planeToPlace = Factory.createPlane(sizes[boardProxy.vo.planes], shapes[boardProxy.vo.planes]);
 			
 			//testeaza ca avionul sa nu depaseasca marginile
 				if (posx <= boardProxy.getBoardSize()-planeToPlace.size) {
@@ -39,8 +39,7 @@ package controller
 						//TODO:testeaza daca avionul nu se suprapune cu altele
 						planeToPlace.rotate(rotation);
 						placePlane(planeToPlace, posx, posy)
-						trace("Avionul cu id " + playerProxy.getNumberOfPlanes() + ", Size " + planeToPlace.size + ", Shape " + planeToPlace.shape + ", depus pe board "+notification.getBody()+", la pozitia "+posx+"  "+posy);
-						playerProxy.addPlane();
+						boardProxy.addPlane(posx, posy, planeToPlace);	
 					}
 					else {
 						trace("Pozitie incorecta, obtine coordonate noi");
@@ -50,6 +49,12 @@ package controller
 						trace("Pozitie incorecta, obtine coordonate noi");
 				}
 			
+			//testeaza daca au fost puse toate avioanele
+			if (boardProxy.vo.planes >= Globals.NUMBER_OF_PLANES) {
+					trace("Avioanele au fost adaugate");
+					//TODO: adauga avioanele pentru CPU
+			}
+				
 			/*while (playerProxy.getNumberOfPlanes()<Globals.NUMBER_OF_PLANES) 
 			{
 				//creeaza primul avion

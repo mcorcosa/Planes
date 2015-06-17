@@ -17,16 +17,17 @@ package model.VO
 			this.size = size;
 			this.shape = shape;
 			
-			for (var i:int = size - 1; i >= 0; i--)
+			for (var i:int = 0; i <= size - 1; i++)
 			{
 				this.map[i] = new Array(size);
-				for (var j:int = size - 1; j >= 0; j--)
+				for (var j:int = 0; j <= size - 1; j++)
 				{
 						if (shape % 2 == 1)
 							this.map[i][j] = 1;
 						else
 							this.map[i][j] = 0;
 						shape = shape / 2;
+						trace(this.map[i][j])
 				}
 			}
 		}
