@@ -17,10 +17,14 @@
     <define append="true">
       <name>CONFIG::timeStamp</name>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <value>'17-Jun-15'</value>
 =======
       <value>'16-Jun-15'</value>
 >>>>>>> master
+=======
+      <value>'16-Jun-15'</value>
+>>>>>>> parent of 6cf53b4... Merge remote-tracking branch 'origin/master'
     </define>
     <define append="true">
       <name>CONFIG::air</name>
