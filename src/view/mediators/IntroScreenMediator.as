@@ -2,6 +2,7 @@ package view.mediators
 {
 	import events.StartGameEvent;
 	import flash.events.DataEvent;
+	import model.PlayerProxy;
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -52,8 +53,18 @@ package view.mediators
 		
 		public function startButtonClicked(e:StartGameEvent):void
 		{
-			sendNotification(STARTSETUP, e.result);
+			//set up player
+			var PlayerName:String = e.result as String;
+			playerProxy.setPlayerName(PlayerName);
+			trace(" Player name set to"+playerProxy.vo.name)
 			viewComponent.removeChild(IS);
+			
+			sendNotification(STARTSETUP, viewComponent);
+		}
+		
+		private function get playerProxy():PlayerProxy
+		{
+			return facade.retrieveProxy(PlayerProxy.NAME) as PlayerProxy;
 		}
 	
 	}

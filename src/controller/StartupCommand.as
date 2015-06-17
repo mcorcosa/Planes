@@ -1,9 +1,11 @@
 package controller
 {
+	import model.DataProxy;
 	import model.PlayerProxy;
 	import org.puremvc.as3.interfaces.ICommand;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
+	import view.mediators.BoardViewMediator;
 	import view.mediators.IntroScreenMediator;
 	
 	/**
@@ -24,7 +26,18 @@ package controller
 		{
 			facade.registerMediator(new IntroScreenMediator("IntroScreenMediator", notification.getBody()));
 			facade.registerProxy(new PlayerProxy());
+			facade.registerMediator(new BoardViewMediator("PlayerBoardViewMediator", notification.getBody()));
+			
+			//load data from XML
+			facade.registerProxy(new DataProxy());
+			dataProxy.loadXML();
 		}
+		
+		private function get dataProxy():DataProxy
+		{
+			return facade.retrieveProxy(DataProxy.NAME) as DataProxy;
+		}
+		
 	
 	}
 

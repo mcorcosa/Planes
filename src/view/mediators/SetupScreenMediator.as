@@ -1,36 +1,37 @@
 package view.mediators 
 {
-	import controller.StartSetupCommand;
+	import model.BoardProxy;
 	import model.PlayerBoardProxy;
 	import org.puremvc.as3.interfaces.IMediator;
-	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
-	import view.views.BoardView;
+	import view.views.SetupScreen;
 	
 	/**
-	 * Mediator pentru BoardView
+	 * ...
 	 * @author gh
 	 */
-	public class BoardViewMediator extends Mediator implements IMediator 
+	public class SetupScreenMediator extends Mediator implements IMediator 
 	{
-		public static const NAME:String = "BoardViewMediator";
+		
+		public static const NAME:String = " SetupScreenMediator";
 		
 		
-		private var BV:BoardView;
+		private var SS:SetupScreen;
 		
-		public function BoardViewMediator(mediatorName:String = null, viewComponent:Object = null)
+		public function SetupScreenMediator(mediatorName:String = null, viewComponent:Object = null)
 		{
 			super(mediatorName, viewComponent);
 		}
 		
 		override public function onRegister():void
 		{
-			BV = new BoardView;
-			trace(" BoardViewMediator registered");
-			viewComponent.addChild(BV);
+			SS = new SetupScreen;
+			trace("SetupScreenMediator registered");
+			viewComponent.addChild(SS);
+			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
 		}
 		
-		override public function listNotificationInterests():Array
+		/*override public function listNotificationInterests():Array
 		{
 			return [StartSetupCommand.DISPLAYBOARD];
 		}
@@ -47,10 +48,15 @@ package view.mediators
 					if (body is PlayerBoardProxy) {
 						viewComponent.addChild(BV);
 						trace(NAME+" got display player board command")
-						BV.display(body.getBoardMap(), body.getBoardSize());
+						BV.draw(body.getBoardMap(), body.getBoardSize());
 					}
 			}
+		}*/
+		private function get playerBoardProxy():BoardProxy
+		{
+			return facade.retrieveProxy(PlayerBoardProxy.NAME) as PlayerBoardProxy;
 		}
+		
 	}
 
 }
