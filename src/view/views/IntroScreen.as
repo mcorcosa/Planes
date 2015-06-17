@@ -12,7 +12,7 @@ package view.views
 	/**
 	 * Afiseaza un IntroScreen - background + textbox pentru player name + buton de start
 	 * executa comanda StartGame
-	 * * TODO: adauga background si text pe startButton
+	 * 
 	 * @author gh
 	 */
 	public class IntroScreen extends Sprite
@@ -42,16 +42,18 @@ package view.views
 			
 			//aspect startButton 
 			var startButtonSprite:Sprite = new Sprite();
+			startText.defaultTextFormat = Globals.label;
+			startText.text = "START";
+			startText.x = 350;
+			startText.y = 285;
+			startButtonSprite.addChild(startText);
 			startButtonSprite.graphics.lineStyle(1, 0xCCCCFF);
 			startButtonSprite.graphics.beginFill(0x000040, 1);
 			startButtonSprite.graphics.drawRoundRect(300, 280, 200, 30, 10, 10);
 			startButtonSprite.graphics.endFill();
 			startButton.overState = startButton.downState = startButton.upState = startButton.hitTestState = startButtonSprite;
 			startButton.addEventListener(MouseEvent.CLICK, startButtonClick);
-			startText.text = "START";
-			startText.defaultTextFormat = Globals.label;
-			startButtonSprite.addChild(startText);
-			
+								
 			
 			//aspect textBox
 			textBox.type = TextFieldType.INPUT;

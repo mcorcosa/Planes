@@ -2,10 +2,12 @@ package
 {
 	import controller.StartSetupCommand;
 	import controller.StartupCommand;
+	import controller.PlacePlanesCommand;
 	import org.puremvc.as3.interfaces.IFacade;
 	import org.puremvc.as3.patterns.facade.Facade;
 	import org.puremvc.as3.patterns.observer.Notification;
 	import view.mediators.IntroScreenMediator;
+	import view.mediators.SetupScreenMediator;
 	
 	/**
 	 * ...
@@ -31,6 +33,7 @@ package
 			
 			registerCommand(STARTUP, StartupCommand);
 			registerCommand(IntroScreenMediator.STARTSETUP, StartSetupCommand);
+			registerCommand(SetupScreenMediator.PLACE, PlacePlanesCommand);
 		}
 		
 		public function startup(stage:Object):void
@@ -45,7 +48,7 @@ package
 			
 			notifyObservers(new Notification(notificationName, body, type));
 		}
-		
+	
 	}
 
 }
