@@ -3,8 +3,11 @@ package controller
 	import flash.events.Event;
 	import model.BoardProxy;
 	import model.DataProxy;
+	import model.PlaneFactory;
+	import model.PlaneSetProxy;
 	import model.PlayerBoardProxy;
 	import model.PlayerProxy;
+	import model.VO.DataVO;
 	import org.puremvc.as3.interfaces.ICommand;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -23,7 +26,17 @@ package controller
 		
 		override public function execute(notification:INotification):void
 		{
-
+			//get data from DataProxy
+			var sizes:Array = dataProxy.getPlaneSizes();
+			var shapes:Array = dataProxy.getPlaneShapes();
+			
+			//create a collection of Planes
+			facade.registerProxy(new PlaneSetProxy());
+			var Factory:PlaneFactory = new PlaneFactory;
+			for (var i:int = planeSetProxy.vo.numberOfPlanes; i < Globals.NUMBER_OF_PLANES; i++) 
+			{
+				planeSetProxy.addPlane(Factory.createPlane(sizes[i], shapes[i]))
+			}
 			
 			//set up player's board and its view
 			facade.registerProxy(new PlayerBoardProxy(dataProxy.getBoardSize()));
@@ -31,11 +44,15 @@ package controller
 			//start Setup Screen
 			facade.registerMediator(new SetupScreenMediator(" SetupScreenMediator", notification.getBody()));			
 			
+
 			//TODO: muta in comanda de Start Game sendNotification(DISPLAYBOARD, playerBoardProxy)
 			
 			
 		}
-		
+		private function get planeSetProxy():PlaneSetProxy
+		{
+			return facade.retrieveProxy(PlaneSetProxy.NAME) as PlaneSetProxy;
+		}
 		
 		private function get playerBoardProxy():BoardProxy
 		{

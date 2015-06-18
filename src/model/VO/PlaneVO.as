@@ -27,9 +27,10 @@ package model.VO
 						else
 							this.map[i][j] = 0;
 						shape = shape / 2;
-						trace(this.map[i][j])
+						//trace(this.map[i][j])
 				}
 			}
+			this.rotate(180)
 		}
 		
 		public function rotate(degrees:int):void {

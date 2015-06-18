@@ -54,19 +54,6 @@ package controller
 					trace("Avioanele au fost adaugate");
 					//TODO: adauga avioanele pentru CPU
 			}
-				
-			/*while (playerProxy.getNumberOfPlanes()<Globals.NUMBER_OF_PLANES) 
-			{
-				//creeaza primul avion
-				
-								
-				//pune userul sa introduca pozitia si rotatia
-				posx = body.x; posy = body.y;
-				
-				
-				else
-					trace("Pozitie incorecta, obtine coordonate noi");
-			}*/
 		}
 		
 		private function placePlane(plane:PlaneVO, posx:int, posy: int):void {

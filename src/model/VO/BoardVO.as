@@ -20,7 +20,7 @@ package model.VO
 				map[i] = new Array (size);
 				for (var j:int = 0; j < size; j++) 
 				{
-					map[i][j]=;
+					map[i][j]=0;
 				}
 			}
 		}
