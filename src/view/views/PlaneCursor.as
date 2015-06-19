@@ -19,12 +19,7 @@ package view.views
 			this.map = omap;
 			this.mapSize = size;
 			super();
-			/*this.width = Globals.HEXWIDTH * size;
-			this.height = Globals.HEXWIDTH * size;
-			this.graphics.drawRect(Globals.HEXWIDTH*(1), Globals.HEXWIDTH*(1), Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
-			this.graphics.endFill(); */
-			/*this.x = stage.mouseX;
-			this.y = stage.mouseY;*/
+			
 		}
 		
 		public function draw(map:Array):void 
@@ -62,6 +57,11 @@ package view.views
 					stage.addChild(rectangle); // adds the rectangle to the stage
 				}
 			}*/
+			this.width = Globals.HEXWIDTH * mapSize;
+			this.height = Globals.HEXWIDTH * mapSize;
+			this.graphics.beginFill(uint(Globals.planeColor));
+			this.graphics.drawRect(0, 0, Globals.HEXWIDTH * mapSize, Globals.HEXWIDTH * mapSize); // (x spacing, y spacing, width, height)
+			this.graphics.endFill(); 
 		}
 
 	}

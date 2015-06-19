@@ -18,7 +18,8 @@ package view.mediators
 	import view.views.SetupScreen;
 	
 	/**
-	 * ...
+	 * Handles the UI elements used for setting up the board prior to starting the game
+	 * TODO: refactor the spaghetti
 	 * @author gh
 	 */
 	public class SetupScreenMediator extends Mediator implements IMediator 
@@ -44,42 +45,48 @@ package view.mediators
 			SS = new SetupScreen;
 			this.SS.addEventListener(ClickGridEvent.CLICKGRIDEVENT, gridClicked);
 			viewComponent.addChild(SS);
+			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
+			
+			//create the plane to be added (to be used only for drawing the cursor)
 			planeToPlace=planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
 			
 			//create custom cursor and add it to stage
 			cursor = new PlaneCursor(planeToPlace.map, planeToPlace.size);
-			
-			viewComponent.addChild(cursor);
-			cursor.width = Globals.HEXWIDTH * planeToPlace.size/3;
-			cursor.height = Globals.HEXWIDTH * planeToPlace.size/3;
+			SS.addEventListener(MouseEvent.MOUSE_MOVE,redrawCursor); 
+			/*cursor.width = Globals.HEXWIDTH * planeToPlace.size;
+			cursor.height = Globals.HEXWIDTH * planeToPlace.size;*/
 			cursor.graphics.beginFill(uint(Globals.planeColor));
 			cursor.graphics.drawRect(0, 0, Globals.HEXWIDTH * planeToPlace.size, Globals.HEXWIDTH * planeToPlace.size); // (x spacing, y spacing, width, height)
-			cursor.graphics.endFill(); 
-			SS.addEventListener(MouseEvent.MOUSE_MOVE,redrawCursor); 
+			cursor.graphics.endFill();
+			viewComponent.addChild(cursor);
+			
+			cursor.draw(planeToPlace.map)
 			Mouse.hide(); 
 			 
 			function redrawCursor(event:MouseEvent):void 
 			{ 
-				cursor.x = event.stageX/15*15; 
-				trace(event.stageX)
-				cursor.y = event.stageY/15*15; 
-				trace(event.stageY)
+				cursor.x = event.stageX; 
+				//trace(event.stageX)
+				cursor.y = event.stageY; 
+				//trace(event.stageY)
 			}
 
 			
 			//
-			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
+
 		}
 		
 		public function gridClicked(e:ClickGridEvent):void {
 			trace(" mediator got click"+ e.x + " "+ e.y)
 			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy);
 			sendNotification(PLACE, coords);
-			cursor.width = Globals.HEXWIDTH * planeToPlace.size;
-			cursor.height = Globals.HEXWIDTH * planeToPlace.size;
+			planeToPlace=planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
+			/*cursor.width = Globals.HEXWIDTH * planeToPlace.size;
+			cursor.height = Globals.HEXWIDTH * planeToPlace.size;*/
 			cursor.graphics.beginFill(uint(Globals.planeColor));
-			cursor.graphics.drawRect(0, 0, Globals.HEXWIDTH * planeToPlace.size, Globals.HEXWIDTH * planeToPlace.size); // (x spacing, y spacing, width, height)
-			cursor.graphics.endFill(); 
+			cursor.graphics.drawRect(0, 0, Globals.HEXWIDTH * planeToPlace.size, Globals.HEXWIDTH * planeToPlace.size); 
+			cursor.graphics.endFill();
+			
 			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
 		}
 		
