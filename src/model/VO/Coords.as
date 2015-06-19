@@ -10,12 +10,14 @@ package model.VO
 			public var x:int;
 			public var y:int;
 			public var boardProxy:BoardProxy;
+			public var planeToPlace;
 		
-		public function Coords(x:int, y:int, boardProxy:BoardProxy) 
+		public function Coords(x:int, y:int, boardProxy:BoardProxy, planeToPlace:PlaneVO) 
 		{
 			this.x = x;
 			this.y = y;
 			this.boardProxy = boardProxy;
+			this.planeToPlace = planeToPlace;
 		}
 		
 		

@@ -1,6 +1,7 @@
 package view.mediators 
 {
 	import events.ClickGridEvent;
+	import events.RotationEvent;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.ui.Mouse;
@@ -31,7 +32,7 @@ package view.mediators
 		
 		private var SS:SetupScreen;
 		public var cursor:PlaneCursor;
-		var planeToPlace:PlaneVO
+		public var planeToPlace:PlaneVO
 		
 		public function SetupScreenMediator(mediatorName:String = null, viewComponent:Object = null)
 		{
@@ -47,18 +48,14 @@ package view.mediators
 			viewComponent.addChild(SS);
 			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
 			
+			this.SS.addEventListener(RotationEvent.ROTATE, rotate)
+			
 			//create the plane to be added (to be used only for drawing the cursor)
 			planeToPlace=planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
 			
 			//create custom cursor and add it to stage
 			cursor = new PlaneCursor(planeToPlace.map, planeToPlace.size);
 			SS.addEventListener(MouseEvent.MOUSE_MOVE,redrawCursor); 
-			/*cursor.width = Globals.HEXWIDTH * planeToPlace.size;
-			cursor.height = Globals.HEXWIDTH * planeToPlace.size;*/
-			
-			/*cursor.graphics.beginFill(uint(Globals.planeColor));
-			cursor.graphics.drawRect(0, 0, Globals.HEXWIDTH * planeToPlace.size, Globals.HEXWIDTH * planeToPlace.size); // (x spacing, y spacing, width, height)
-			cursor.graphics.endFill();*/
 			
 			for (var i:int = 0; i < planeToPlace.size; i++)
 			{
@@ -77,10 +74,8 @@ package view.mediators
 						default:
 						//cursorTile.graphics.beginFill(uint(Globals.lightBlue));
 					}
-					//cursorTile.graphics.lineStyle(1, 0x000000);
 					cursorTile.graphics.drawRect(Globals.HEXWIDTH*+i, Globals.HEXWIDTH*j, Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
 					cursorTile.graphics.endFill(); 
-					//cursor.overState = cursor.downState = cursor.upState = cursor.hitTestState = cursorTile;
 
 					cursor.addChild(cursorTile); // adds the cursor to the cursor
 				}	
@@ -90,6 +85,7 @@ package view.mediators
 			
 			cursor.draw(planeToPlace.map)
 			Mouse.hide(); 
+			
 			 
 			function redrawCursor(event:MouseEvent):void 
 			{ 
@@ -98,15 +94,21 @@ package view.mediators
 				cursor.y = event.stageY; 
 				//trace(event.stageY)
 			}
-
 			
-			//
-
+			//handle rotation
+			SS.addEventListener(RotationEvent.ROTATE, rotate); 
+		}
+				
+		public function rotate(e:MouseEvent):void {
+			trace("wheel click registered")
+			planeToPlace.rotate(90);
+			cursor.draw(planeToPlace.map)
+			cursor.draw(planeToPlace.map)
 		}
 		
 		public function gridClicked(e:ClickGridEvent):void {
-			trace(" mediator got click"+ e.x + " "+ e.y)
-			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy);
+			trace(" mediator got click" + e.x + " " + e.y);
+			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy, planeToPlace);
 			sendNotification(PLACE, coords);
 			planeToPlace = planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
 			cursor.width = Globals.HEXWIDTH * planeToPlace.size;
@@ -116,7 +118,7 @@ package view.mediators
 			while (cursor.numChildren > 0) {
 				cursor.removeChildAt(0);
 			}
-
+			
 			cursor.draw(planeToPlace.map)		
 			cursor.draw(planeToPlace.map)
 			
