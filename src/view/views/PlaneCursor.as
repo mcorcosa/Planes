@@ -57,11 +57,39 @@ package view.views
 					stage.addChild(rectangle); // adds the rectangle to the stage
 				}
 			}*/
+			
 			this.width = Globals.HEXWIDTH * mapSize;
 			this.height = Globals.HEXWIDTH * mapSize;
-			this.graphics.beginFill(uint(Globals.planeColor));
-			this.graphics.drawRect(0, 0, Globals.HEXWIDTH * mapSize, Globals.HEXWIDTH * mapSize); // (x spacing, y spacing, width, height)
-			this.graphics.endFill(); 
+			//this.graphics.beginFill(uint(Globals.planeColor));
+			//this.graphics.drawRect(0, 0, Globals.HEXWIDTH * mapSize, Globals.HEXWIDTH * mapSize); // (x spacing, y spacing, width, height)
+			//this.graphics.endFill(); 
+			
+			for (var i:int = 0; i < mapSize; i++)
+			{
+				for (var j:int = 0; j < mapSize; j++)
+				{
+					var cursorTile:Sprite = new Sprite();
+				
+					//schimba culoarea in functie de ce e pe tile
+					switch (map[j][i]) 
+					{
+						//tile e gol
+						case 1:
+							cursorTile.graphics.beginFill(uint(Globals.planeColor));
+						break;
+						
+						default:
+						//cursorTile.graphics.beginFill(uint(Globals.lightBlue));
+					}
+					//cursorTile.graphics.lineStyle(1, 0x000000);
+					cursorTile.graphics.drawRect(Globals.HEXWIDTH*+i, Globals.HEXWIDTH*j, Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
+					cursorTile.graphics.endFill(); 
+					//cursor.overState = cursor.downState = cursor.upState = cursor.hitTestState = cursorTile;
+
+					this.addChild(cursorTile); // adds the cursor to the cursor
+				}	
+			}
+			
 		}
 
 	}

@@ -55,9 +55,37 @@ package view.mediators
 			SS.addEventListener(MouseEvent.MOUSE_MOVE,redrawCursor); 
 			/*cursor.width = Globals.HEXWIDTH * planeToPlace.size;
 			cursor.height = Globals.HEXWIDTH * planeToPlace.size;*/
-			cursor.graphics.beginFill(uint(Globals.planeColor));
+			
+			/*cursor.graphics.beginFill(uint(Globals.planeColor));
 			cursor.graphics.drawRect(0, 0, Globals.HEXWIDTH * planeToPlace.size, Globals.HEXWIDTH * planeToPlace.size); // (x spacing, y spacing, width, height)
-			cursor.graphics.endFill();
+			cursor.graphics.endFill();*/
+			
+			for (var i:int = 0; i < planeToPlace.size; i++)
+			{
+				for (var j:int = 0; j < planeToPlace.size; j++)
+				{
+					var cursorTile:Sprite = new Sprite();
+				
+					//schimba culoarea in functie de ce e pe tile
+					switch (playerBoardProxy.vo.map[i][j]) 
+					{
+						//tile e gol
+						case 1:
+							cursorTile.graphics.beginFill(uint(Globals.planeColor));
+						break;
+						
+						default:
+						//cursorTile.graphics.beginFill(uint(Globals.lightBlue));
+					}
+					//cursorTile.graphics.lineStyle(1, 0x000000);
+					cursorTile.graphics.drawRect(Globals.HEXWIDTH*+i, Globals.HEXWIDTH*j, Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
+					cursorTile.graphics.endFill(); 
+					//cursor.overState = cursor.downState = cursor.upState = cursor.hitTestState = cursorTile;
+
+					cursor.addChild(cursorTile); // adds the cursor to the cursor
+				}	
+			}
+			
 			viewComponent.addChild(cursor);
 			
 			cursor.draw(planeToPlace.map)
@@ -80,12 +108,17 @@ package view.mediators
 			trace(" mediator got click"+ e.x + " "+ e.y)
 			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy);
 			sendNotification(PLACE, coords);
-			planeToPlace=planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
-			/*cursor.width = Globals.HEXWIDTH * planeToPlace.size;
-			cursor.height = Globals.HEXWIDTH * planeToPlace.size;*/
-			cursor.graphics.beginFill(uint(Globals.planeColor));
-			cursor.graphics.drawRect(0, 0, Globals.HEXWIDTH * planeToPlace.size, Globals.HEXWIDTH * planeToPlace.size); 
-			cursor.graphics.endFill();
+			planeToPlace = planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
+			cursor.width = Globals.HEXWIDTH * planeToPlace.size;
+			cursor.height = Globals.HEXWIDTH * planeToPlace.size;
+			cursor.mapSize = planeToPlace.size;
+			
+			while (cursor.numChildren > 0) {
+				cursor.removeChildAt(0);
+			}
+
+			cursor.draw(planeToPlace.map)		
+			cursor.draw(planeToPlace.map)
 			
 			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
 		}
