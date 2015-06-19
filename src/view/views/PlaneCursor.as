@@ -24,6 +24,7 @@ package view.views
 		
 		public function draw(map:Array):void 
 		{
+
 			/*for (var i:int = 0; i < mapSize-1; i++ )
 			{
 				for (var j:int = 0; j < mapSize-1; i++)
@@ -63,6 +64,10 @@ package view.views
 			//this.graphics.beginFill(uint(Globals.planeColor));
 			//this.graphics.drawRect(0, 0, Globals.HEXWIDTH * mapSize, Globals.HEXWIDTH * mapSize); // (x spacing, y spacing, width, height)
 			//this.graphics.endFill(); 
+			
+						while (this.numChildren > 0) {
+				this.removeChildAt(0);
+			}
 			
 			for (var i:int = 0; i < mapSize; i++)
 			{

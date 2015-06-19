@@ -22,22 +22,20 @@ package controller
 		{
 			var Factory:PlaneFactory = new PlaneFactory;
 			var sizes:Array = dataProxy.getPlaneSizes();
-			var shapes:Array = dataProxy.getPlaneShapes();
-			var planeToPlace:PlaneVO;
+			var shapes:Array = dataProxy.getPlaneShapes()
 			var name:String = notification.getName();
 			var body:Object = notification.getBody();
-			var posx:int = body.x, posy:int = body.y, rotation:int = 0;
+			var posx:int = body.x, posy:int = body.y, planeToPlace:PlaneVO = body.planeToPlace;
 			var boardProxy:BoardProxy = body.boardProxy;
 			
 			//creeaza avionul
-			planeToPlace = Factory.createPlane(sizes[boardProxy.vo.planes], shapes[boardProxy.vo.planes]);
+			//planeToPlace = Factory.createPlane(sizes[boardProxy.vo.planes], shapes[boardProxy.vo.planes]);
 			
 			//testeaza ca avionul sa nu depaseasca marginile
 				if (posx <= boardProxy.getBoardSize()-planeToPlace.size) {
 					if (posy <= boardProxy.getBoardSize()-planeToPlace.size) {
 
 						//TODO:testeaza daca avionul nu se suprapune cu altele
-						planeToPlace.rotate(rotation);
 						placePlane(planeToPlace, posx, posy)
 						boardProxy.addPlane(posx, posy, planeToPlace);	
 					}
