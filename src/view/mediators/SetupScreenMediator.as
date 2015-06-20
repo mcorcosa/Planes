@@ -5,6 +5,8 @@ package view.mediators
 	import events.RotationEvent;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
+	import flash.text.TextFormatAlign;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
 	import model.BoardProxy;
@@ -31,10 +33,12 @@ package view.mediators
 		public static const NAME:String = " SetupScreenMediator";
 		public static const PLACE:String = " Place"
 		public static const CLICKGRIDEVENT:String = " Click grid Event";
+		public static const INCORRECT:String  = "Incorrect"
 		
 		private var SS:SetupScreen;
 		public var cursor:PlaneCursor;
 		public var planeToPlace:PlaneVO
+		public var textField:TextField = new TextField();
 		
 		public function SetupScreenMediator(mediatorName:String = null, viewComponent:Object = null)
 		{
@@ -57,7 +61,17 @@ package view.mediators
 			
 			//create custom cursor and add it to stage
 			cursor = new PlaneCursor(planeToPlace.map, planeToPlace.size);
-			SS.addEventListener(MouseEvent.MOUSE_MOVE,redrawCursor); 
+			SS.addEventListener(MouseEvent.MOUSE_MOVE, redrawCursor); 
+			
+			
+			
+			textField.width = 200; 
+			textField.x = (Globals.HEXWIDTH*playerBoardProxy.vo.size-textField.width)/2;
+			textField.y = Globals.HEXWIDTH*playerBoardProxy.vo.size+20
+			textField.defaultTextFormat = Globals.smallFormat;
+			textField.text = "Place your planes";
+
+			viewComponent.addChild(textField);
 			
 			for (var i:int = 0; i < planeToPlace.size; i++)
 			{
@@ -110,7 +124,7 @@ package view.mediators
 		}
 		
 		public function gridClicked(e:ClickGridEvent):void {
-			trace(" mediator got click" + e.x + " " + e.y);
+			trace("Click at " + e.x + " " + e.y);
 			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy, planeToPlace);
 			sendNotification(PLACE, coords);
 			planeToPlace = planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
@@ -125,11 +139,12 @@ package view.mediators
 				cursor.draw(planeToPlace.map)
 			}			
 			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
+			
 		}
 		
 		override public function listNotificationInterests():Array
 		{
-			return [PlacePlanesCommand.BOARDFULL];
+			return [PlacePlanesCommand.BOARDFULL, PlacePlanesCommand.INCORRECT]
 		}
 		
 		override public function handleNotification(notification:INotification):void
@@ -146,6 +161,12 @@ package view.mediators
 						viewComponent.removeChild(cursor)
 						Mouse.show()
 					}
+					break;
+					
+				case PlacePlanesCommand.INCORRECT:
+					trace("Pozitie incorecta, obtine coordonate noi");
+					textField.text="Cannot place here"
+					break;
 			}
 		}
 		

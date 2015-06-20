@@ -21,6 +21,7 @@ package controller
 	{	
 		public static const NAME:String = 'PlacePlanesCommand ';
 		public static const BOARDFULL:String = 'Board full';
+		public static const INCORRECT:String = 'Incorrect'
 	 
 		override public function execute(notification:INotification):void
 		{
@@ -42,20 +43,20 @@ package controller
 						{
 							for (var j:int = posx; j < planeToPlace.size+posx; j++) 
 							{
-								if (boardProxy.vo.map[i][j] == 1 && planeToPlace.map[j - posx][i - posy] == 1){
-								trace("Avioanele se suprapun")
+								if (boardProxy.vo.map[i][j] == 1 && planeToPlace.map[j - posx][i - posy] == 1) {
+								sendNotification(INCORRECT)	
 								okToPlace = false;}
 							}
 						}
 						
 					}
 					else {
-						trace("Pozitie incorecta, obtine coordonate noi");
+						sendNotification(INCORRECT)
 						okToPlace = false;
 					}
 					}
 				else {
-						trace("Pozitie incorecta, obtine coordonate noi");
+						sendNotification(INCORRECT)
 						okToPlace = false;
 				}
 				
