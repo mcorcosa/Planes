@@ -16,18 +16,20 @@ package controller
 	 * TODO: refactor pentru ca tot procesul de setup sa il execut cu un macro command
 	 * @author gh
 	 */
+	
 	public class PlacePlanesCommand extends SimpleCommand implements ICommand
 	{	
+		public static const NAME:String = 'PlacePlanesCommand ';
+		public static const BOARDFULL:String = 'Board full';
+	 
 		override public function execute(notification:INotification):void
 		{
-			var Factory:PlaneFactory = new PlaneFactory;
-			var sizes:Array = dataProxy.getPlaneSizes();
-			var shapes:Array = dataProxy.getPlaneShapes()
 			var name:String = notification.getName();
 			var body:Object = notification.getBody();
 			var posx:int = body.x, posy:int = body.y, planeToPlace:PlaneVO = body.planeToPlace;
 			var boardProxy:BoardProxy = body.boardProxy;
 			var okToPlace:Boolean = true;
+			
 			
 			//creeaza avionul
 			//planeToPlace = Factory.createPlane(sizes[boardProxy.vo.planes], shapes[boardProxy.vo.planes]);
@@ -64,10 +66,9 @@ package controller
 			
 			//testeaza daca au fost puse toate avioanele
 			if (boardProxy.vo.planes >= Globals.NUMBER_OF_PLANES) {
-					trace("Avioanele au fost adaugate");
-					//TODO: adauga avioanele pentru CPU
+				trace("Avioanele au fost adaugate");
+				sendNotification(BOARDFULL, boardProxy)
 			}
-			
 		}
 		
 		private function placePlane(plane:PlaneVO, posx:int, posy: int):void {

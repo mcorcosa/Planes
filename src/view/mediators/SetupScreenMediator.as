@@ -1,5 +1,6 @@
 package view.mediators 
 {
+	import controller.PlacePlanesCommand;
 	import events.ClickGridEvent;
 	import events.RotationEvent;
 	import flash.display.Sprite;
@@ -14,6 +15,7 @@ package view.mediators
 	import model.VO.Coords;
 	import model.VO.PlaneVO;
 	import org.puremvc.as3.interfaces.IMediator;
+	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
 	import view.views.PlaneCursor;
 	import view.views.SetupScreen;
@@ -102,7 +104,6 @@ package view.mediators
 		}
 				
 		public function rotate(e:MouseEvent):void {
-			trace("wheel click registered")
 			planeToPlace.rotate(90);
 			cursor.draw(planeToPlace.map)
 			cursor.draw(planeToPlace.map)
@@ -113,23 +114,22 @@ package view.mediators
 			var coords:Coords = new Coords(e.x, e.y, playerBoardProxy, planeToPlace);
 			sendNotification(PLACE, coords);
 			planeToPlace = planeSetProxy.vo.collection[playerBoardProxy.vo.planes]
-			cursor.width = Globals.HEXWIDTH * planeToPlace.size;
-			cursor.height = Globals.HEXWIDTH * planeToPlace.size;
-			cursor.mapSize = planeToPlace.size;
-			
-			while (cursor.numChildren > 0) {
-				cursor.removeChildAt(0);
-			}
-			
-			cursor.draw(planeToPlace.map)		
-			cursor.draw(planeToPlace.map)
-			
+			if(planeToPlace){
+				cursor.width = Globals.HEXWIDTH * planeToPlace.size;
+				cursor.height = Globals.HEXWIDTH * planeToPlace.size;
+				cursor.mapSize = planeToPlace.size;
+				while (cursor.numChildren > 0) {
+					cursor.removeChildAt(0);
+					}
+				cursor.draw(planeToPlace.map)		
+				cursor.draw(planeToPlace.map)
+			}			
 			SS.display(playerBoardProxy.vo.map, playerBoardProxy.getBoardSize())
 		}
 		
-		/*override public function listNotificationInterests():Array
+		override public function listNotificationInterests():Array
 		{
-			return [StartSetupCommand.DISPLAYBOARD];
+			return [PlacePlanesCommand.BOARDFULL];
 		}
 		
 		override public function handleNotification(notification:INotification):void
@@ -139,15 +139,17 @@ package view.mediators
 			
 			switch (name)
 			{
-				case StartSetupCommand.DISPLAYBOARD: 
-					//testeaza daca trebuie desenata tabla jucatorului sau CPU
+				case PlacePlanesCommand.BOARDFULL: 
+					//daca playerboard e full, ascunde setupscreen
 					if (body is PlayerBoardProxy) {
-						viewComponent.addChild(BV);
-						trace(NAME+" got display player board command")
-						BV.draw(body.getBoardMap(), body.getBoardSize());
+						viewComponent.removeChild(SS)
+						viewComponent.removeChild(cursor)
+						Mouse.show()
 					}
 			}
-		}*/
+		}
+		
+		
 		private function get playerBoardProxy():BoardProxy
 		{
 			return facade.retrieveProxy(PlayerBoardProxy.NAME) as PlayerBoardProxy;

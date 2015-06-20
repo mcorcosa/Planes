@@ -1,5 +1,6 @@
 package
 {
+	import controller.CPUSetupCommand;
 	import controller.StartSetupCommand;
 	import controller.StartupCommand;
 	import controller.PlacePlanesCommand;
@@ -34,6 +35,8 @@ package
 			registerCommand(STARTUP, StartupCommand);
 			registerCommand(IntroScreenMediator.STARTSETUP, StartSetupCommand);
 			registerCommand(SetupScreenMediator.PLACE, PlacePlanesCommand);
+			registerCommand(PlacePlanesCommand.BOARDFULL, CPUSetupCommand)
+			registerCommand(CPUSetupCommand.PLACE, PlacePlanesCommand);
 		}
 		
 		public function startup(stage:Object):void

@@ -16,7 +16,7 @@ package controller
 	import view.mediators.SetupScreenMediator;
 	
 	/**
-	 * ...
+	 * Sets up the game: boards, setup screen
 	 * @author gh
 	 */
 	public class StartSetupCommand extends SimpleCommand implements ICommand
@@ -42,7 +42,7 @@ package controller
 			//set up player's board and its view
 			facade.registerProxy(new PlayerBoardProxy(dataProxy.getBoardSize()));
 			
-			//start Setup Screen
+			//start (Player) Setup Screen
 			facade.registerMediator(new SetupScreenMediator(" SetupScreenMediator", notification.getBody()));			
 						
 			//set up CPU's board

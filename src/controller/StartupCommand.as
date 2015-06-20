@@ -26,7 +26,7 @@ package controller
 		{
 			facade.registerMediator(new IntroScreenMediator("IntroScreenMediator", notification.getBody()));
 			facade.registerProxy(new PlayerProxy());
-			facade.registerMediator(new BoardViewMediator("PlayerBoardViewMediator", notification.getBody()));
+			//facade.registerMediator(new BoardViewMediator("PlayerBoardViewMediator", notification.getBody()));
 			
 			//load data from XML
 			facade.registerProxy(new DataProxy());
