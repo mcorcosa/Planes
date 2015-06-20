@@ -27,6 +27,7 @@ package controller
 			var body:Object = notification.getBody();
 			var posx:int = body.x, posy:int = body.y, planeToPlace:PlaneVO = body.planeToPlace;
 			var boardProxy:BoardProxy = body.boardProxy;
+			var okToPlace:Boolean = true;
 			
 			//creeaza avionul
 			//planeToPlace = Factory.createPlane(sizes[boardProxy.vo.planes], shapes[boardProxy.vo.planes]);
@@ -34,24 +35,39 @@ package controller
 			//testeaza ca avionul sa nu depaseasca marginile
 				if (posx <= boardProxy.getBoardSize()-planeToPlace.size) {
 					if (posy <= boardProxy.getBoardSize()-planeToPlace.size) {
-
-						//TODO:testeaza daca avionul nu se suprapune cu altele
-						placePlane(planeToPlace, posx, posy)
-						boardProxy.addPlane(posx, posy, planeToPlace);	
+						//testeaza daca avionul nu se suprapune cu altele
+						for (var i:int = posy; i < planeToPlace.size+posy; i++) 
+						{
+							for (var j:int = posx; j < planeToPlace.size+posx; j++) 
+							{
+								if (boardProxy.vo.map[i][j] == 1 && planeToPlace.map[j - posx][i - posy] == 1){
+								trace("Avioanele se suprapun")
+								okToPlace = false;}
+							}
+						}
+						
 					}
 					else {
 						trace("Pozitie incorecta, obtine coordonate noi");
+						okToPlace = false;
 					}
 					}
 				else {
 						trace("Pozitie incorecta, obtine coordonate noi");
+						okToPlace = false;
 				}
+				
+			if (okToPlace==true) {
+				placePlane(planeToPlace, posx, posy)
+				boardProxy.addPlane(posx, posy, planeToPlace);
+			}
 			
 			//testeaza daca au fost puse toate avioanele
 			if (boardProxy.vo.planes >= Globals.NUMBER_OF_PLANES) {
 					trace("Avioanele au fost adaugate");
 					//TODO: adauga avioanele pentru CPU
 			}
+			
 		}
 		
 		private function placePlane(plane:PlaneVO, posx:int, posy: int):void {

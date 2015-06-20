@@ -38,6 +38,7 @@ package model
 			{
 				for (var j:int = posx; j < planeToPlace.size+posx; j++) 
 				{
+					if(planeToPlace.map[j-posx][i-posy]==1)
 					vo.map[i][j]=planeToPlace.map[j-posx][i-posy]
 				}
 			}

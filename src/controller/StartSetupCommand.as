@@ -2,6 +2,7 @@ package controller
 {
 	import flash.events.Event;
 	import model.BoardProxy;
+	import model.CPUBoardProxy;
 	import model.DataProxy;
 	import model.PlaneFactory;
 	import model.PlaneSetProxy;
@@ -43,7 +44,9 @@ package controller
 			
 			//start Setup Screen
 			facade.registerMediator(new SetupScreenMediator(" SetupScreenMediator", notification.getBody()));			
-			
+						
+			//set up CPU's board
+			facade.registerProxy(new CPUBoardProxy(dataProxy.getBoardSize()));
 
 			//TODO: muta in comanda de Start Game sendNotification(DISPLAYBOARD, playerBoardProxy)
 			

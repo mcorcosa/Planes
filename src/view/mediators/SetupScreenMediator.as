@@ -20,7 +20,7 @@ package view.mediators
 	
 	/**
 	 * Handles the UI elements used for setting up the board prior to starting the game
-	 * TODO: refactor the spaghetti
+	 * TODO: refactor the spaghetti (possibly a new command to use this mediator and implement the business logic)
 	 * @author gh
 	 */
 	public class SetupScreenMediator extends Mediator implements IMediator 
@@ -94,6 +94,8 @@ package view.mediators
 				cursor.y = event.stageY; 
 				//trace(event.stageY)
 			}
+			
+			//TODO: allow counter clockwise rotation
 			
 			//handle rotation
 			SS.addEventListener(RotationEvent.ROTATE, rotate); 
