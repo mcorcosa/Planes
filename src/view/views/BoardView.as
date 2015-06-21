@@ -46,18 +46,16 @@ package view.views
 						//change tile color according to BoardVO's map
 						switch (map[i][j]) 
 						{
-							//tile is empty
-							case 0:
-								rectangle.graphics.beginFill(uint("0x" + Globals.lightBlue.substr(1)));
+							case 0: 
+							rectangle.graphics.beginFill(uint("0x" + Globals.lightBlue.substr(1)));
 							break;
 							
-							//tile is a dead plane
-							case 999:
-								rectangle.graphics.beginFill(0x800000);
+							case 999: 
+							rectangle.graphics.beginFill(0x000000);
 							break;
-							
+						
 							case 1000:
-							tileButtonSprite.graphics.beginFill(0x800000);
+							rectangle.graphics.beginFill(0x800000);
 							break;
 							
 							//plane is present

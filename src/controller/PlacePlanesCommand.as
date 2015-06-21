@@ -41,7 +41,8 @@ package controller
 							{
 								if (boardProxy.vo.map[i][j] == 1 && planeToPlace.map[j - posx][i - posy] == 1) {
 								sendNotification(INCORRECT)	
-								okToPlace = false;}
+								okToPlace = false;
+								}
 							}
 						}
 						

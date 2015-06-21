@@ -1,6 +1,7 @@
 package view.mediators 
 {
 	import controller.CPUSetupCommand;
+	import controller.ShootCommand;
 	import controller.StartSetupCommand;
 	import events.ClickGridEvent;
 	import model.BoardProxy;
@@ -55,21 +56,12 @@ package view.mediators
 		
 		override public function listNotificationInterests():Array
 		{
-			return [DISPLAY];
+			return [ShootCommand.UPDATE];
 		}
 		
 		override public function handleNotification(notification:INotification):void
 		{
-			var name:String = notification.getName();
-			var body:Object = notification.getBody();
-			
-			switch (name)
-			{
-				case StartSetupCommand.DISPLAYBOARD: 
-					trace("Updated view")
-					PlayerBoardView.display();
-					CPUBoardView.display();
-			}
+			PlayerBoardView.display();
 		}
 		
 		private function get playerBoardProxy():BoardProxy

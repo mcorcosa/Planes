@@ -36,6 +36,7 @@ package
 			registerCommand(CPUSetupCommand.PLACE, PlacePlanesCommand);
 			registerCommand(SetupScreenMediator.STARTGAME, StartGameCommand)
 			registerCommand(GameScreenMediator.SHOOT, ShootCommand)
+			registerCommand(ShootCommand.SHOOT, ShootCommand)
 		}
 		
 		public function startup(stage:Object):void

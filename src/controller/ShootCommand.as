@@ -1,6 +1,8 @@
 package controller 
 {
 	import model.BoardProxy;
+	import model.CPUBoardProxy;
+	import model.PlayerBoardProxy;
 	import model.VO.Coords;
 	import org.puremvc.as3.interfaces.ICommand;
 	import org.puremvc.as3.interfaces.INotification;
@@ -14,6 +16,7 @@ package controller
 	{
 		public static const NAME:String = "ShootCommand"
 		public static const SHOOT:String = "Shoot"
+		public static const UPDATE:String = "Update"
 		
 		public function ShootCommand() 
 		{
@@ -33,27 +36,59 @@ package controller
 			
 			trace("Shot at "+x+" "+y)
 			
-			if (boardProxy.vo.map[x][y] > 0 && boardProxy.vo.map[x][y] < 999){
-				trace("Hit!")
-				var hitPlaneID:int=boardProxy.vo.map[x][y]
-				for (var i:int = 0; i < boardProxy.vo.size; i++) 
-				{
-					for (var j:int = 0; j < boardProxy.vo.size; j++) 
-						{
-							if (boardProxy.vo.map[i][j] == hitPlaneID) {
-								boardProxy.vo.map[i][j] = 999;
+			switch (boardProxy.vo.map[x][y]) 
+			{
+				case 0: 
+					boardProxy.vo.map[x][y] = 1000;
+				break;
+				
+				case 999: 
+					
+				break;
+				
+				case 1000: 
+				
+				break;
+				
+				default: {
+					trace("Hit!")
+					boardProxy.vo.planes--;
+					trace(boardProxy.vo.planes+" Planes remaining")
+					var hitPlaneID:int=boardProxy.vo.map[x][y]
+					for (var i:int = 0; i < boardProxy.vo.size; i++) 
+					{
+						for (var j:int = 0; j < boardProxy.vo.size; j++) 
+							{
+								if (boardProxy.vo.map[i][j] == hitPlaneID) {
+									boardProxy.vo.map[i][j] = 999;
+								}
 							}
-						}
+					}
 				}
 			}
+
+			var CPUcoords:Coords = new Coords (randomRange(0, 19), randomRange(0, 19), playerBoardProxy, null)
 			
-			else {
-				boardProxy.vo.map[x][y] = 1000;
-				trace("Miss!")
+			if (boardProxy.vo.planes == 0)
+				trace("gameover")
+
+			//CPU response
+			if(boardProxy is CPUBoardProxy){
+			sendNotification(SHOOT, CPUcoords)
+			sendNotification(UPDATE)
 			}
-			
 		}
 		
+			//generate a random number
+			private function randomRange(minNum:int, maxNum:int):int 
+				{
+					return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+				}
+		
+			private function get playerBoardProxy():BoardProxy
+				{
+					return facade.retrieveProxy(PlayerBoardProxy.NAME) as PlayerBoardProxy;
+				}	
 	}
 
 }
