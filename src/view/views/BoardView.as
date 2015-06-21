@@ -31,14 +31,18 @@ package view.views
 			var map:Array = boardProxy.vo.map;
 			var size:int = boardProxy.vo.size;
 			
+			while (this.numChildren > 0) {
+				this.removeChildAt(0);
+			}
+			
 			if(boardProxy is PlayerBoardProxy){
 				
 				for (var i:int = 0; i < size; i++)
-				{
+				{			
 					for (var j:int = 0; j < size; j++)
 					{
 						var rectangle:Shape = new Shape; // initializing the variable named rectangle
-						
+
 						//change tile color according to BoardVO's map
 						switch (map[i][j]) 
 						{
@@ -50,6 +54,10 @@ package view.views
 							//tile is a dead plane
 							case 999:
 								rectangle.graphics.beginFill(0x800000);
+							break;
+							
+							case 1000:
+							tileButtonSprite.graphics.beginFill(0x800000);
 							break;
 							
 							//plane is present
@@ -65,29 +73,34 @@ package view.views
 			}
 			else 
 			{
-				for (var i:int = 0; i < size; i++)
+				for (var k:int = 0; k < size; k++)
 			{
-				for (var j:int = 0; j < size; j++)
+
+				for (var l:int = 0; l < size; l++)
 				{
+					
 					var CPUrectangle:SimpleButton = new SimpleButton;
 					var tileButtonSprite:Sprite = new Sprite();
-
-					switch (map[i][j])
+					switch (map[k][l])
 					{
 						case 0: 
 							tileButtonSprite.graphics.beginFill(uint("0x" + Globals.lightBlue.substr(1)));
 							break;
 							
 						case 999: 
+							tileButtonSprite.graphics.beginFill(0x000000);
+							break;
+						
+						case 1000:
 							tileButtonSprite.graphics.beginFill(0x800000);
 							break;
 						
 						default: 
-							tileButtonSprite.graphics.beginFill(uint(Globals.planeColor));
+							tileButtonSprite.graphics.beginFill(uint("0x" + Globals.lightBlue.substr(1)));
 					}
 					
 					tileButtonSprite.graphics.lineStyle(1, 0x000000);
-					tileButtonSprite.graphics.drawRect(Globals.HEXWIDTH * (1 + i)+Globals.HEXWIDTH*25, Globals.HEXWIDTH * (1 + j), Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
+					tileButtonSprite.graphics.drawRect(Globals.HEXWIDTH * (1 + k)+Globals.HEXWIDTH*25, Globals.HEXWIDTH * (1 + l), Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
 					tileButtonSprite.graphics.endFill();
 					CPUrectangle.addEventListener(MouseEvent.CLICK, tileClicked);
 					CPUrectangle.overState = CPUrectangle.downState = CPUrectangle.upState = CPUrectangle.hitTestState = tileButtonSprite;
@@ -97,8 +110,8 @@ package view.views
 			}
 		function tileClicked(e:MouseEvent):void
 			{
-				var y:int = (stage.mouseX - Globals.HEXWIDTH+Globals.HEXWIDTH*25) / Globals.HEXWIDTH
-				var x:int = (stage.mouseY - Globals.HEXWIDTH+Globals.HEXWIDTH*25) / Globals.HEXWIDTH
+				var y:int = (stage.mouseX - Globals.HEXWIDTH- Globals.HEXWIDTH*25) / Globals.HEXWIDTH
+				var x:int = (stage.mouseY - Globals.HEXWIDTH) / Globals.HEXWIDTH
 				//trace ("player clicked " +x + " " + y);  
 				dispatchEvent(new ClickGridEvent(CLICKGRIDEVENT, x, y, true));
 			}

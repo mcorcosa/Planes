@@ -22,6 +22,10 @@ package
 		
 		public static const HEXWIDTH:int = 20;
 		
+		public static var DEAD:int = 999;
+		
+		public static var HIT:int = 1000;
+		
 		public function Globals()
 		{
 		

@@ -57,7 +57,6 @@ package controller
 				}
 				
 			if (okToPlace==true) {
-				placePlane(planeToPlace, posx, posy)
 				boardProxy.addPlane(posx, posy, planeToPlace);
 			}
 			
@@ -66,10 +65,6 @@ package controller
 				trace("All planes were placed");
 				sendNotification(BOARDFULL, boardProxy)
 			}
-		}
-		
-		private function placePlane(plane:PlaneVO, posx:int, posy: int):void {
-			
 		}
 
 		private function get dataProxy():DataProxy

@@ -39,7 +39,7 @@ package model
 				for (var j:int = posx; j < planeToPlace.size+posx; j++) 
 				{
 					if(planeToPlace.map[j-posx][i-posy]==1)
-					vo.map[i][j]=planeToPlace.map[j-posx][i-posy]
+					vo.map[i][j] = planeToPlace.map[j - posx][i - posy] + vo.planes;
 				}
 			}
 			trace("Avionul cu id " + vo.planes + ", Size " + planeToPlace.size + ", Shape " + planeToPlace.shape + ", depus pe board "+vo+", la pozitia "+posx+"  "+posy);

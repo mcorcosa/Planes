@@ -1,13 +1,10 @@
 package
 {
-	import controller.CPUSetupCommand;
-	import controller.StartGameCommand;
-	import controller.StartSetupCommand;
-	import controller.StartupCommand;
-	import controller.PlacePlanesCommand;
+	import controller.*;
 	import org.puremvc.as3.interfaces.IFacade;
 	import org.puremvc.as3.patterns.facade.Facade;
 	import org.puremvc.as3.patterns.observer.Notification;
+	import view.mediators.GameScreenMediator;
 	import view.mediators.IntroScreenMediator;
 	import view.mediators.SetupScreenMediator;
 	
@@ -38,6 +35,7 @@ package
 			registerCommand(PlacePlanesCommand.BOARDFULL, CPUSetupCommand)
 			registerCommand(CPUSetupCommand.PLACE, PlacePlanesCommand);
 			registerCommand(SetupScreenMediator.STARTGAME, StartGameCommand)
+			registerCommand(GameScreenMediator.SHOOT, ShootCommand)
 		}
 		
 		public function startup(stage:Object):void
