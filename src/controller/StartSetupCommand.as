@@ -12,7 +12,7 @@ package controller
 	import org.puremvc.as3.interfaces.ICommand;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
-	import view.mediators.BoardViewMediator;
+	import view.mediators.GameScreenMediator;
 	import view.mediators.SetupScreenMediator;
 	
 	/**
@@ -47,9 +47,6 @@ package controller
 						
 			//set up CPU's board
 			facade.registerProxy(new CPUBoardProxy(dataProxy.getBoardSize()));
-
-			//TODO: muta in comanda de Start Game sendNotification(DISPLAYBOARD, playerBoardProxy)
-			
 			
 		}
 		private function get planeSetProxy():PlaneSetProxy

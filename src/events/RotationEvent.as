@@ -5,7 +5,7 @@ package events
 	import flash.events.MouseEvent;
 	
 	/**
-	 * ...
+	 * Event dispatched when the user scrolls the mouse wheel
 	 * @author gh
 	 */
 	public class RotationEvent extends MouseEvent 

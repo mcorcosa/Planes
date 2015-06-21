@@ -4,7 +4,7 @@ package model
 	import model.VO.PlaneVO;
 	
 	/**
-	 * ...
+	 * A factory used to create Plane objects, may be useful when larger amounts of planes is needed
 	 * @author gh
 	 */
 	public class PlaneFactory

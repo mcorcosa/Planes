@@ -3,7 +3,7 @@ package events
 	import flash.events.Event;
 	
 	/**
-	 * ...
+	 * Event dispatched for starting the game, carrying the player's name
 	 * @author gh
 	 */
 	public class StartGameEvent extends Event 

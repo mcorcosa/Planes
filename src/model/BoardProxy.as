@@ -6,7 +6,7 @@ package model
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 	/**
-	 * Proxy pentru acces la BoardVO
+	 * Proxy for accessing BoardVO
 	 * @author gh
 	 */
 	public class BoardProxy extends Proxy implements IProxy 

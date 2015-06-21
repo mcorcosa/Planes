@@ -13,7 +13,7 @@ package view.views
 	import model.VO.PlaneVO;
 	
 	/**
-	 * Afiseaza un ecran pentru asezarea avioanelor pe tabla
+	 * Displays a screen for placing Player's planes onto the board
 	 * @author gh
 	 */
 	public class SetupScreen extends Sprite
@@ -31,16 +31,13 @@ package view.views
 				{
 					var rectangle:SimpleButton = new SimpleButton;
 					var tileButtonSprite:Sprite = new Sprite();
-					
-					//schimba culoarea in functie de ce e pe tile
+
 					switch (map[i][j])
 					{
-						//tile e gol
 						case 0: 
 							tileButtonSprite.graphics.beginFill(uint("0x" + Globals.lightBlue.substr(1)));
 							break;
-						
-						//tile e un avion mort
+							
 						case 999: 
 							tileButtonSprite.graphics.beginFill(0x800000);
 							break;
@@ -56,14 +53,13 @@ package view.views
 					rectangle.addEventListener(MouseEvent.MOUSE_WHEEL, rotate);
 					rectangle.overState = rectangle.downState = rectangle.upState = rectangle.hitTestState = tileButtonSprite;
 					
-					addChild(rectangle); // adds the rectangle to the stage
+					addChild(rectangle);
 				}
 			}
 		}
 		
 		public function tileClicked(e:MouseEvent):void
 		{
-			//dispatcher.addEventListener(ClickGridEvent.CLICKGRIDEVENT, tileClicked)
 			var y:int = (stage.mouseX - Globals.HEXWIDTH) / Globals.HEXWIDTH
 			var x:int = (stage.mouseY - Globals.HEXWIDTH) / Globals.HEXWIDTH
 			//trace ("player clicked " +x + " " + y);  

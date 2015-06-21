@@ -1,8 +1,8 @@
 package model.VO 
 {
 	/**
-	 * VO care pastreaza dimensiunea si "harta" suprafetei de joc
-	 * TODO: eventual, regandeste-o ca sa contina AvionVO la anumite coordonate
+	 * VO that keeps the size and map of a board
+	 * TODO: could be refactored to "contain" planes at certain coordinates
 	 * @author gh
 	 */
 	public class BoardVO 

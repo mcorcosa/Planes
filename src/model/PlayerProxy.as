@@ -7,7 +7,7 @@ package model
 	import view.mediators.IntroScreenMediator;
 	
 	/**
-	 * Proxy pentru acces la PlayerVO
+	 * Proxy for access to PlayerVO
 	 * @author gh
 	 */
 	public class PlayerProxy extends Proxy implements IProxy

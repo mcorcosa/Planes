@@ -2,7 +2,7 @@ package model.VO
 {
 	
 	/**
-	 * VO care pastreaza dimensiunea si forma avionului
+	 * VO that keeps the size and shape of a Plane object
 	 *
 	 * @author gh
 	 */

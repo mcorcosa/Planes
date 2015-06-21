@@ -34,6 +34,7 @@ package view.mediators
 		public static const PLACE:String = " Place"
 		public static const CLICKGRIDEVENT:String = " Click grid Event";
 		public static const INCORRECT:String  = "Incorrect"
+		public static const STARTGAME:String = 'Start Game'
 		
 		private var SS:SetupScreen;
 		public var cursor:PlaneCursor;
@@ -79,10 +80,10 @@ package view.mediators
 				{
 					var cursorTile:Sprite = new Sprite();
 				
-					//schimba culoarea in functie de ce e pe tile
+					//change the tile color, according to the plane's map
 					switch (playerBoardProxy.vo.map[i][j]) 
 					{
-						//tile e gol
+						//tile is empty
 						case 1:
 							cursorTile.graphics.beginFill(uint(Globals.planeColor));
 						break;
@@ -93,7 +94,7 @@ package view.mediators
 					cursorTile.graphics.drawRect(Globals.HEXWIDTH*+i, Globals.HEXWIDTH*j, Globals.HEXWIDTH, Globals.HEXWIDTH); // (x spacing, y spacing, width, height)
 					cursorTile.graphics.endFill(); 
 
-					cursor.addChild(cursorTile); // adds the cursor to the cursor
+					cursor.addChild(cursorTile); // adds the cursorTile to the cursor
 				}	
 			}
 			
@@ -155,16 +156,20 @@ package view.mediators
 			switch (name)
 			{
 				case PlacePlanesCommand.BOARDFULL: 
-					//daca playerboard e full, ascunde setupscreen
+					//if playerboard is full, hide setupscreen and other children
 					if (body is PlayerBoardProxy) {
 						viewComponent.removeChild(SS)
 						viewComponent.removeChild(cursor)
+						viewComponent.removeChild(textField)
 						Mouse.show()
 					}
+					
+					else
+					sendNotification(STARTGAME, viewComponent)
 					break;
 					
 				case PlacePlanesCommand.INCORRECT:
-					trace("Pozitie incorecta, obtine coordonate noi");
+					trace("Incorrect coordinates, cannot place here");
 					textField.text="Cannot place here"
 					break;
 			}

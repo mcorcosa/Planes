@@ -3,7 +3,7 @@ package
 	import flash.text.TextFormat;
 	
 	/**
-	 * ...
+	 * Holds some globally used variables
 	 * @author gh
 	 */
 	public class Globals

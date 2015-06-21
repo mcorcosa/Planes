@@ -31,14 +31,10 @@ package controller
 			var boardProxy:BoardProxy = body.boardProxy;
 			var okToPlace:Boolean = true;
 			
-			
-			//creeaza avionul
-			//planeToPlace = Factory.createPlane(sizes[boardProxy.vo.planes], shapes[boardProxy.vo.planes]);
-			
-			//testeaza ca avionul sa nu depaseasca marginile
+			//test that the plane does not go out of board's boundaries
 				if (posx <= boardProxy.getBoardSize()-planeToPlace.size) {
 					if (posy <= boardProxy.getBoardSize()-planeToPlace.size) {
-						//testeaza daca avionul nu se suprapune cu altele
+						//test for overlaps
 						for (var i:int = posy; i < planeToPlace.size+posy; i++) 
 						{
 							for (var j:int = posx; j < planeToPlace.size+posx; j++) 
@@ -65,9 +61,9 @@ package controller
 				boardProxy.addPlane(posx, posy, planeToPlace);
 			}
 			
-			//testeaza daca au fost puse toate avioanele
+			//test if all the planes have been added for the board
 			if (boardProxy.vo.planes >= Globals.NUMBER_OF_PLANES) {
-				trace("Avioanele au fost adaugate");
+				trace("All planes were placed");
 				sendNotification(BOARDFULL, boardProxy)
 			}
 		}

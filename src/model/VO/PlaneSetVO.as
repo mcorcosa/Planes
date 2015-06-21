@@ -1,7 +1,7 @@
 package model.VO 
 {
 	/**
-	 * VO care pastreaza colectia de avioane creata din informatia din Data
+	 * VO keeping a set of 4 different planes, created using the data from DataVO
 	 * @author ...
 	 */
 	public class PlaneSetVO 

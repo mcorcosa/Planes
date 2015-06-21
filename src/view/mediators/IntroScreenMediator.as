@@ -10,7 +10,7 @@ package view.mediators
 	import view.views.IntroScreen;
 	
 	/**
-	 * Mediator pentru Introscreen
+	 * Mediator for Introscreen
 	 * @author gh
 	 */
 	public class IntroScreenMediator extends Mediator implements IMediator

@@ -10,8 +10,8 @@ package view.views
 	import flash.text.*;
 	
 	/**
-	 * Afiseaza un IntroScreen - background + textbox pentru player name + buton de start
-	 * executa comanda StartGame
+	 * Displays IntroScreen - background + textbox for player name + start button
+	 * fires StartGameCommand
 	 * 
 	 * @author gh
 	 */
@@ -33,29 +33,29 @@ package view.views
 			startButton = new SimpleButton;
 			textField = new TextField;
 			
+			//textField appearance
 			textField.width = 200; 
-			textField.x = 300;
+			textField.x = (stage.stageWidth-textField.width)/2;
 			textField.y = 140;
 			textField.defaultTextFormat = Globals.smallFormat;
 			textField.text = "Please enter a player name";
 			addChild(textField);
 			
-			//aspect startButton 
+			//startButton appearance
 			var startButtonSprite:Sprite = new Sprite();
 			startText.defaultTextFormat = Globals.label;
 			startText.text = "START";
-			startText.x = 350;
+			startText.x = (stage.stageWidth-startText.width)/2;
 			startText.y = 285;
 			startButtonSprite.addChild(startText);
 			startButtonSprite.graphics.lineStyle(1, 0xCCCCFF);
 			startButtonSprite.graphics.beginFill(0x000040, 1);
-			startButtonSprite.graphics.drawRoundRect(300, 280, 200, 30, 10, 10);
+			startButtonSprite.graphics.drawRoundRect((stage.stageWidth-textField.width)/2, 280, 200, 30, 10, 10);
 			startButtonSprite.graphics.endFill();
 			startButton.overState = startButton.downState = startButton.upState = startButton.hitTestState = startButtonSprite;
 			startButton.addEventListener(MouseEvent.CLICK, startButtonClick);
 								
-			
-			//aspect textBox
+			//textBox appearance
 			textBox.type = TextFieldType.INPUT;
 			textBox.background = true;
 			textBox.backgroundColor = uint("0x" + Globals.lightBlue.substr(1));
@@ -63,7 +63,7 @@ package view.views
             textBox.height = 30;  
 			textBox.borderColor = 0x000040;
             textBox.border = true; 
-			textBox.x = 300;
+			textBox.x = (stage.stageWidth-textBox.width)/2;
 			textBox.y = 200;
 			textBox.defaultTextFormat = Globals.format;
 			

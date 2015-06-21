@@ -5,11 +5,11 @@ package controller
 	import org.puremvc.as3.interfaces.ICommand;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
-	import view.mediators.BoardViewMediator;
+	import view.mediators.GameScreenMediator;
 	import view.mediators.IntroScreenMediator;
 	
 	/**
-	 * Porneste aplicatia, face register la mediatoare, proxies
+	 * Starts the app up, registers facade, some mediators and proxies
 	 * @author gh
 	 */
 	public class StartupCommand extends SimpleCommand implements ICommand
@@ -21,7 +21,7 @@ package controller
 		
 		}
 		
-		//face register la Proxies, Mediatoare
+		//registers some Proxies, Mediators
 		override public function execute(notification:INotification):void
 		{
 			facade.registerMediator(new IntroScreenMediator("IntroScreenMediator", notification.getBody()));

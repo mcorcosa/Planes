@@ -5,7 +5,7 @@ package model
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 	/**
-	 * ...
+	 * Proxy for handling and operating DataVO
 	 * @author gh
 	 */
 	public class DataProxy extends Proxy implements IProxy 

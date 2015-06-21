@@ -5,7 +5,7 @@ package model.VO
 	import flash.net.URLRequest;
 	
 	/**
-	 * incarca data despre
+	 * reads and holds data from an external XML file
 	 */
 	public class DataVO
 	{

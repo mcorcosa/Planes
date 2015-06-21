@@ -2,7 +2,7 @@ package model.VO
 {
 	import model.BoardProxy;
 	/**
-	 * ...
+	 * Object used to encapsulate all the info for placing a plane onto a board
 	 * @author ...
 	 */
 	public class Coords 

@@ -5,7 +5,7 @@ package events
 	import flash.events.MouseEvent;
 	
 	/**
-	 * ...
+	 * Event that contains the coordinates a board has been clicked on at
 	 * @author ...
 	 */
 	public class ClickGridEvent extends MouseEvent 
@@ -22,7 +22,6 @@ package events
 			this.y = y;
 		}
 
-		// always create a clone() method for events in case you want to redispatch them.
 		public override function clone():Event
 		{
 			return new ClickGridEvent(type, x, y, bubbles, cancelable);

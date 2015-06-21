@@ -18,6 +18,7 @@ package controller
 	{
 		public static const NAME:String = "CPUSetupCommand"
 		public static const PLACE:String = NAME + 'PLACE';
+
 		
 		public function CPUSetupCommand() 
 		{
@@ -32,23 +33,23 @@ package controller
 
 			//testeaza daca e plina tabla Player sau a CPU
 			if (body is PlayerBoardProxy) {
-				trace("lets place plans")
 				PlacePlanes(cPUBoardProxy)
 			}
+			//else sendNotification (STARTGAME);
 		}
 		
 		private function PlacePlanes(boardProxy:BoardProxy):void {
 			
 			while (cPUBoardProxy.vo.planes < Globals.NUMBER_OF_PLANES) {
 				
-				//obtine coordonatele, rotatia + generare random
+				//get random coordinates and rotation
 				var x:int, y:int, rotations:int;
 				x = randomRange(0, boardProxy.vo.size);
 				y = randomRange(0, boardProxy.vo.size);
 				rotations = randomRange(0, 16);
-				trace("the random coords are" + x + y + rotations)
+				trace("the random coords are" + x + " " + y)
 			
-				//creeaza si roteste avionul care trebuie asezat
+				//create and rotate the plane to be placed
 				var planeToPlace:PlaneVO;
 				planeToPlace=planeSetProxy.vo.collection[cPUBoardProxy.vo.planes]
 				for (var i:int = 0; i < rotations; i++) 
@@ -61,7 +62,7 @@ package controller
 				planeToPlace = planeSetProxy.vo.collection[cPUBoardProxy.vo.planes]
 			}
 			
-			//functie care genereaza numere random
+			//generate a random number
 			function randomRange(minNum:int, maxNum:int):int 
 				{
 					return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);

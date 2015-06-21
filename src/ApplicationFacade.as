@@ -1,6 +1,7 @@
 package
 {
 	import controller.CPUSetupCommand;
+	import controller.StartGameCommand;
 	import controller.StartSetupCommand;
 	import controller.StartupCommand;
 	import controller.PlacePlanesCommand;
@@ -20,14 +21,13 @@ package
 		
 		public static const STARTUP:String = NAME + 'StartUp';
 		
-		//instantiaza ApplicationFacade, apelata in main
+		//instantiates ApplicationFacade
 		public static function getInstance():ApplicationFacade
 		{
 			return (instance ? instance : new ApplicationFacade()) as ApplicationFacade;
 		}
 		
-		//TODO: scrie + fa register la comenzile de care mai e nevoie
-		//initializeaza Controllerul si face register la comenzi
+		//initializes Controllerul and registers commands
 		override protected function initializeController():void
 		{
 			super.initializeController();
@@ -37,6 +37,7 @@ package
 			registerCommand(SetupScreenMediator.PLACE, PlacePlanesCommand);
 			registerCommand(PlacePlanesCommand.BOARDFULL, CPUSetupCommand)
 			registerCommand(CPUSetupCommand.PLACE, PlacePlanesCommand);
+			registerCommand(SetupScreenMediator.STARTGAME, StartGameCommand)
 		}
 		
 		public function startup(stage:Object):void
@@ -44,7 +45,6 @@ package
 			sendNotification(STARTUP, stage);
 		}
 		
-		//suprascrie sendNotification, ca sa adaug trace()
 		override public function sendNotification(notificationName:String, body:Object = null, type:String = null):void
 		{
 			trace(' Sent ' + notificationName);

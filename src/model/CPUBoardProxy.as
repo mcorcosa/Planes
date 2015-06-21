@@ -1,7 +1,7 @@
 package model 
 {
 	/**
-	 * ...
+	 * Proxy for accessing a Board owned by CPU Player
 	 * @author gh
 	 */
 	public class CPUBoardProxy extends BoardProxy
