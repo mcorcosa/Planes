@@ -17,6 +17,7 @@ package controller
 		public static const NAME:String = "ShootCommand"
 		public static const SHOOT:String = "Shoot"
 		public static const UPDATE:String = "Update"
+		public static const GAMEOVER:String = "GameOver"
 		
 		public function ShootCommand() 
 		{
@@ -69,13 +70,15 @@ package controller
 
 			var CPUcoords:Coords = new Coords (randomRange(0, 19), randomRange(0, 19), playerBoardProxy, null)
 			
-			if (boardProxy.vo.planes == 0)
+			if (boardProxy.vo.planes == 0){
 				trace("gameover")
+				sendNotification(GAMEOVER, boardProxy)
+			}
 
 			//CPU response
-			if(boardProxy is CPUBoardProxy){
-			sendNotification(SHOOT, CPUcoords)
-			sendNotification(UPDATE)
+			else if(boardProxy is CPUBoardProxy){
+				sendNotification(SHOOT, CPUcoords)
+				sendNotification(UPDATE)
 			}
 		}
 		

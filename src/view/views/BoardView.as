@@ -5,8 +5,10 @@ package view.views
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	import model.BoardProxy;
 	import model.PlayerBoardProxy;
+	import model.PlayerProxy;
 	
 	/**
 	 * Draws a board according to the BoardVO's map
@@ -68,6 +70,15 @@ package view.views
 						addChild(rectangle);
 					}
 				}
+				
+				//add a label under the board
+				var playerLabel:TextField = new TextField;
+				playerLabel.width = Globals.HEXWIDTH*10
+				playerLabel.x = (Globals.HEXWIDTH*boardProxy.vo.size-playerLabel.width)/2;
+				playerLabel.y = Globals.HEXWIDTH*(boardProxy.vo.size+2)
+				playerLabel.defaultTextFormat = Globals.labelFormat;
+				playerLabel.text = "Your planes. Remaining: "+boardProxy.vo.planes;
+				addChild(playerLabel);
 			}
 			else 
 			{
@@ -105,6 +116,14 @@ package view.views
 					addChild(CPUrectangle);
 				}
 			}
+			//add a label under the board
+				var CPULabel:TextField = new TextField;
+				CPULabel.width = Globals.HEXWIDTH*10
+				CPULabel.x = (Globals.HEXWIDTH*boardProxy.vo.size-CPULabel.width)/2+Globals.HEXWIDTH*25;
+				CPULabel.y = Globals.HEXWIDTH*(boardProxy.vo.size+2)
+				CPULabel.defaultTextFormat = Globals.labelFormat;
+				CPULabel.text = "CPU planes. Remaining: "+boardProxy.vo.planes;
+				addChild(CPULabel);
 			}
 		function tileClicked(e:MouseEvent):void
 			{
@@ -116,4 +135,5 @@ package view.views
 		}
 	}
 
+	 
 }

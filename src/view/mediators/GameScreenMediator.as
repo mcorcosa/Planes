@@ -4,9 +4,12 @@ package view.mediators
 	import controller.ShootCommand;
 	import controller.StartSetupCommand;
 	import events.ClickGridEvent;
+	import flash.display.Shape;
+	import flash.text.TextField;
 	import model.BoardProxy;
 	import model.CPUBoardProxy;
 	import model.PlayerBoardProxy;
+	import model.PlayerProxy;
 	import model.VO.Coords;
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.interfaces.INotification;
@@ -22,10 +25,13 @@ package view.mediators
 		public static const NAME:String = "GameScreenMediator";
 		public static const DISPLAY:String = "Display"
 		public static const SHOOT:String = "Shoot"
+		public static const UPDATE:String = "Update"
+		public static const GAMEOVER:String = "GameOver"
 		
 		private var BV:BoardView;
 		public var PlayerBoardView:BoardView;
 		public var CPUBoardView:BoardView;
+		public var winnerLabel:TextField;
 		
 		public function GameScreenMediator(mediatorName:String = null, viewComponent:Object = null)
 		{
@@ -56,17 +62,66 @@ package view.mediators
 		
 		override public function listNotificationInterests():Array
 		{
-			return [ShootCommand.UPDATE];
+			return [ShootCommand.UPDATE, ShootCommand.GAMEOVER];
 		}
 		
 		override public function handleNotification(notification:INotification):void
 		{
-			PlayerBoardView.display();
+			var name:String = String(notification.getName())
+			
+			
+			switch (name) 
+			{
+				case UPDATE:
+					PlayerBoardView.display();
+					
+				break;
+				
+				case GAMEOVER:
+					var boardProxy:BoardProxy = BoardProxy(notification.getBody())
+					if (boardProxy is CPUBoardProxy) {
+						trace("Player wins")
+						drawWinnerLabel(boardProxy)
+					}
+			
+					else {
+						trace("CPU wins")
+						drawWinnerLabel(boardProxy)
+					}
+				break;
+				
+				default:
+			}
+
+		}
+		
+		private function drawWinnerLabel(boardProxy:BoardProxy):void {
+				var winner:String, winnerLabel:TextField = new TextField;
+				
+				CPUBoardView.removeEventListener(ClickGridEvent.CLICKGRIDEVENT, gridClicked)
+				
+				if (boardProxy is CPUBoardProxy)
+					winner = playerProxy.vo.name;
+					else
+						winner = 'CPU'
+
+				winnerLabel.backgroundColor = uint(Globals.lightBlue.substr(1));
+				winnerLabel.width = Globals.HEXWIDTH*10
+				winnerLabel.x = (950-winnerLabel.width)/2;
+				winnerLabel.y = Globals.HEXWIDTH*(boardProxy.vo.size+2)
+				winnerLabel.defaultTextFormat = Globals.labelFormat;
+				winnerLabel.text = winner+" won!";
+				viewComponent.addChild(winnerLabel);
 		}
 		
 		private function get playerBoardProxy():BoardProxy
 		{
 			return facade.retrieveProxy(PlayerBoardProxy.NAME) as BoardProxy;
+		}
+		
+		private function get playerProxy():PlayerProxy
+		{
+			return facade.retrieveProxy(PlayerProxy.NAME) as PlayerProxy;
 		}
 		
 		private function get cPUBoardProxy():BoardProxy

@@ -70,7 +70,7 @@ package view.mediators
 			textField.x = (Globals.HEXWIDTH*playerBoardProxy.vo.size-textField.width)/2;
 			textField.y = Globals.HEXWIDTH*playerBoardProxy.vo.size+20
 			textField.defaultTextFormat = Globals.smallFormat;
-			textField.text = "Place your planes";
+			textField.text = "Place your planes \n Use mouse wheel to rotate";
 
 			viewComponent.addChild(textField);
 			
