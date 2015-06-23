@@ -15,14 +15,6 @@ package model.VO
 			
 		}
 		
-		public function setName(PlayerName:String):void {
-			this.name = PlayerName;
-		}
-		
-		public function getName():String {
-				return this.name;
-		}
-		
 	}
 
 }

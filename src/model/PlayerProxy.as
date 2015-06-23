@@ -23,7 +23,7 @@ package model
 		
 		public function setPlayerName(PlayerName:String):void
 		{
-			vo.setName(PlayerName);
+			vo.name = PlayerName;
 		}
 		
 		public function get vo():PlayerVO

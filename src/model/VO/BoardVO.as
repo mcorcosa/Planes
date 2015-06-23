@@ -11,33 +11,9 @@ package model.VO
 		public var map:Array;
 		public var planes:int = 0;
 		
-		public function BoardVO(size:int) 
+		public function BoardVO() 
 		{
-			this.size = size;
-			map = new Array(size);
-			for (var i:int = 0; i < size; i++) 
-			{
-				map[i] = new Array (size);
-				for (var j:int = 0; j < size; j++) 
-				{
-					map[i][j]=0;
-				}
-			}
-		}
-		
-		public function display():void {
-			for (var i:int = 0; i < size; i++) 
-			{
-				trace ("linia" +i);
-				for (var j:int = 0; j < size; j++) 
-				{
-					trace (map[i][j]);
-				}
-			}
-		}
-		
-		public function addPlane():void {
-			planes++;
+			
 		}
 		
 	}
