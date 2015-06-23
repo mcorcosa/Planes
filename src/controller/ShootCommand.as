@@ -37,36 +37,34 @@ package controller
 			
 			trace("Shot at "+x+" "+y)
 			
-			switch (boardProxy.vo.map[x][y]) 
-			{
-				case 0: 
-					boardProxy.vo.map[x][y] = 1000;
-				break;
-				
-				case 999: 
-					
-				break;
-				
-				case 1000: 
-				
-				break;
-				
-				default: {
-					trace("Hit!")
-					boardProxy.vo.planes--;
+			if (boardProxy.vo.map[x][y]) {
+				trace("Hit!")
+
 					trace(boardProxy.vo.planes+" Planes remaining")
-					var hitPlaneID:int=boardProxy.vo.map[x][y]
+					var hitPlaneID:int = boardProxy.vo.map[x][y]
+					boardProxy.vo.map[x][y] = 999;
+					
+					//check if plane is dead
+					var planeIsDead:Boolean = true
 					for (var i:int = 0; i < boardProxy.vo.size; i++) 
 					{
-						for (var j:int = 0; j < boardProxy.vo.size; j++) 
-							{
+						for (var j:int = 0; j < boardProxy.vo.size; j++) {
 								if (boardProxy.vo.map[i][j] == hitPlaneID) {
-									boardProxy.vo.map[i][j] = 999;
+									planeIsDead = false;
 								}
-							}
+						}
 					}
-				}
+					if(planeIsDead == true)
+						boardProxy.vo.planes--;
+					
+					if(boardProxy is PlayerBoardProxy){
+						var CPUcoords:Coords = new Coords (randomRange(0, 19), randomRange(0, 19), playerBoardProxy, null)
+						sendNotification(SHOOT, CPUcoords)
+						sendNotification(UPDATE)
+				}	
 			}
+			else if (boardProxy.vo.map[x][y] ==0)
+				boardProxy.vo.map[x][y] = 1000;
 
 			var CPUcoords:Coords = new Coords (randomRange(0, 19), randomRange(0, 19), playerBoardProxy, null)
 			
