@@ -105,6 +105,7 @@ package view.views
 							break;
 						
 						default: 
+							//tileButtonSprite.graphics.beginFill(uint(Globals.planeColor)); FOR TESTING PURPOSES ONLY!
 							tileButtonSprite.graphics.beginFill(uint("0x" + Globals.lightBlue.substr(1)));
 					}
 					

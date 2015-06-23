@@ -39,7 +39,7 @@ package controller
 						{
 							for (var j:int = posx; j < planeToPlace.size+posx; j++) 
 							{
-								if (boardProxy.vo.map[i][j] == 1 && planeToPlace.map[j - posx][i - posy] == 1) {
+								if (boardProxy.vo.map[i][j] > 0 && planeToPlace.map[j - posx][i - posy] > 0) {
 								sendNotification(INCORRECT)	
 								okToPlace = false;
 								}
@@ -59,6 +59,7 @@ package controller
 				
 			if (okToPlace==true) {
 				boardProxy.addPlane(posx, posy, planeToPlace);
+				//boardProxy.displayBoard();
 			}
 			
 			//test if all the planes have been added for the board

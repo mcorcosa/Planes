@@ -30,7 +30,8 @@ package model.VO
 						//trace(this.map[i][j])
 				}
 			}
-			this.rotate(180)
+			this.rotate(90)
+			this.rotate(90)
 		}
 		
 		public function rotate(degrees:int):void {
