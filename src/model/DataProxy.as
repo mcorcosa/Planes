@@ -28,7 +28,7 @@ package model
 			vo.planeShape = new Array(4);
 			vo.planeSize = new Array(4);
 			var sizesXML:XML = new XML();
-			var XML_URL:String = "assets/sizes.xml";
+			var XML_URL:String = "../assets/sizes.xml";
 			var myXMLURL:URLRequest = new URLRequest(XML_URL);
 			var myLoader:URLLoader = new URLLoader(myXMLURL);
 			myLoader.addEventListener(Event.COMPLETE, xmlLoaded);
